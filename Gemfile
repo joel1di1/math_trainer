@@ -16,6 +16,9 @@ gem 'webpacker', '~> 4.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'slim-rails'
 end
 
 group :development do
