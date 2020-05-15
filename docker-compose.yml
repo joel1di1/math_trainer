@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   postgres:
-    container_name: math_trainer
+    container_name: math_trainer_development
     image: postgres:10.10-alpine
     ports:
       - '${POSTGRES_PORT:-5432}:5432'
