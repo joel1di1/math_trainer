@@ -1,24 +1,37 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## start app
+`docker-compose up`
+`bin/webpack-dev-server`
+`rails s`
 
-Things you may want to cover:
 
-* Ruby version
+## TODO
 
-* System dependencies
 
-* Configuration
+### Rajouter les multiplications à trous
 
-* Database creation
+### Rajouter les Additions, les additions à trous
 
-* Database initialization
+### Notion de session de travail,
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+### Challenge: En faire un max en 1 minute
+Minuteur sur le côté
 
-* Deployment instructions
 
-* ...
+### Matchs / combats
+4 opérations
+coup simple
+coup spécial
+parade
+
+Truc où on choisi, pouyr avoir un côté stratégique
+Truc où ça vient tout seul avec des thèmes et une difficulté croissante
+
+
+
+
+
+
+
