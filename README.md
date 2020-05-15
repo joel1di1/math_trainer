@@ -28,10 +28,3 @@ parade
 
 Truc où on choisi, pouyr avoir un côté stratégique
 Truc où ça vient tout seul avec des thèmes et une difficulté croissante
-
-
-
-
-
-
-
