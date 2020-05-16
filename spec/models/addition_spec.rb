@@ -20,5 +20,19 @@ RSpec.describe Addition, type: :model do
       it { expect(addition.correct?(answer)).to be true }
       it { expect(addition.correct?(false_answer)).to be false }
     end
+
+    context 'with hole position at 1' do
+      let(:addition) { create :addition, hole_position: 1 }
+
+      let(:answer) { Answer.new(text: addition.number_1.to_s) }
+      it { expect(addition.correct?(answer)).to be true }
+    end
+
+    context 'with hole position at 2' do
+      let(:addition) { create :addition, hole_position: 2 }
+
+      let(:answer) { Answer.new(text: addition.number_2.to_s) }
+      it { expect(addition.correct?(answer)).to be true }
+    end
   end
 end

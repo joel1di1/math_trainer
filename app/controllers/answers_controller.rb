@@ -47,12 +47,13 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       @answer.update!(answer_params)
+      path_method = "next_#{@answer.problem.type.downcase}s_path"
       if @answer.correct?
         flash[:congrats] = random_congrats_message
-        path = next_multiplications_path
+        path = send path_method
       else
         flash[:missed] = random_missed_message
-        path = next_multiplications_path(id: @answer.problem)
+        path = send path_method, id: @answer.problem
       end
       format.html { redirect_to path }
       format.json { render :show, status: :ok, location: @answer }

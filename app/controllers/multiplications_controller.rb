@@ -7,6 +7,8 @@ class MultiplicationsController < ApplicationController
     multiplication = Multiplication.find(params[:id]) if params[:id]
     multiplication ||= Multiplication.random(current_user)
     @answer = multiplication.create_answer!(current_user)
+
+    render 'problems/next'
   end
 
   # # GET /multiplications

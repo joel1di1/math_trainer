@@ -1,0 +1,8 @@
+.text-center
+  - flash.each do |key, value|
+    div class=flash_class(key) role='alert'
+      = value
+
+  div
+    = form_with(model: @answer, local: true) do |form|
+      = render partial: @answer.problem.type.downcase, locals: { problem: @answer.problem, form: form }
