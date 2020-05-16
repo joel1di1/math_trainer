@@ -64,6 +64,7 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.problems (
     id bigint NOT NULL,
+    type character varying,
     number_1 integer,
     number_2 integer,
     hole_position integer,

@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :additions
-  resources :answers
-  resources :multiplications
-  resources :problems
   devise_for :users
   root 'home#index'
+
+  # resources :additions
+  # resources :multiplications
+  resources :answers, only: :update
+
+  resources :multiplications, only: [] do
+    collection do
+      get :next
+    end
+  end
 end

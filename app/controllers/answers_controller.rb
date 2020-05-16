@@ -3,6 +3,11 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: %i[show edit update destroy]
 
+  CONGRATS = ['Bravo', 'Génial', 'Super', 'Woohaa', 'Fantastique', 'Trop fort', 'Champion', 'Trop Bien'].freeze
+  CONGRATS_EMOJIS = %w[😀 😃 😇 🙂 😍 😉 😘 🤪 😋 😜 😺 👏 👍 🙌 👌 👌].freeze
+  MISSED = ['Zut', 'Raté', 'Dommage', 'Presque', 'Encore un effort', 'Recommence'].freeze
+  MISSED_EMOJIS = %w[☹️ 😡 😱 😨 😓 😰 🤔 😳].freeze
+
   # GET /answers
   # GET /answers.json
   def index
@@ -41,13 +46,14 @@ class AnswersController < ApplicationController
   # PATCH/PUT /answers/1.json
   def update
     respond_to do |format|
-      if @answer.update(answer_params)
-        format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @answer }
+      @answer.update!(answer_params)
+      if @answer.correct?
+        flash[:congrats] = random_congrats_message
       else
-        format.html { render :edit }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
+        flash[:missed] = random_missed_message
       end
+      format.html { redirect_to next_multiplications_path }
+      format.json { render :show, status: :ok, location: @answer }
     end
   end
 
@@ -71,5 +77,15 @@ class AnswersController < ApplicationController
   # Only allow a list of trusted parameters through.
   def answer_params
     params.require(:answer).permit(:user_id, :operation_id, :text)
+  end
+
+  protected
+
+  def random_congrats_message
+    "#{CONGRATS.sample} #{CONGRATS_EMOJIS.sample}"
+  end
+
+  def random_missed_message
+    "#{MISSED.sample} #{MISSED_EMOJIS.sample}"
   end
 end
