@@ -1,0 +1,19 @@
+h1 Listing multiplications
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @multiplications.each do |multiplication|
+      tr
+        td = link_to 'Show', multiplication
+        td = link_to 'Edit', edit_multiplication_path(multiplication)
+        td = link_to 'Destroy', multiplication, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Multiplication', new_multiplication_path

@@ -1,0 +1,7 @@
+example_id                                    | status | run_time        |
+--------------------------------------------- | ------ | --------------- |
+./spec/models/multiplication_spec.rb[1:1:1:1] | passed | 0.02444 seconds |
+./spec/models/multiplication_spec.rb[1:1:1:2] | passed | 0.02612 seconds |
+./spec/models/multiplication_spec.rb[1:1:2:1] | passed | 0.0793 seconds  |
+./spec/models/multiplication_spec.rb[1:1:2:2] | passed | 0.01793 seconds |
+./spec/models/user_spec.rb[1:1]               | passed | 0.25417 seconds |
