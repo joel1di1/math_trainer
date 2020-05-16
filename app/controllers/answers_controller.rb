@@ -49,10 +49,12 @@ class AnswersController < ApplicationController
       @answer.update!(answer_params)
       if @answer.correct?
         flash[:congrats] = random_congrats_message
+        path = next_multiplications_path
       else
         flash[:missed] = random_missed_message
+        path = next_multiplications_path(id: @answer.problem)
       end
-      format.html { redirect_to next_multiplications_path }
+      format.html { redirect_to path }
       format.json { render :show, status: :ok, location: @answer }
     end
   end

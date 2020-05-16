@@ -1,19 +1,13 @@
 
-- flash.each do |key, value|
-  div class=key role='alert'
-    = value
+.text-center
+  - flash.each do |key, value|
+    div class=flash_class(key) role='alert'
+      = value
 
-= form_with(model: @answer, local: true) do |form|
-  - if @answer.errors.any?
-    #error_explanation
-      h2
-        = pluralize(@multiplication.errors.count, "error")
-        |  prohibited this @multiplication from being saved:
-      ul
-        - @multiplication.errors.full_messages.each do |message|
-          li
-            = message
-  h2.text-center
-    = "#{@answer.problem.number_1} x #{@answer.problem.number_2} = "
-    = form.number_field :text, autofocus: true, size: 1
-  = form.submit 'Répondre'
+  div
+    = form_with(model: @answer, local: true) do |form|
+      .text-4xl
+        = "#{@answer.problem.number_1} x #{@answer.problem.number_2} = "
+        = form.number_field :text, autofocus: true, size: 1, class: 'w-24 border rounded-lg shadow-sm'
+
+        = form.submit 'OK', class: 'mx-10 cursor-pointer text-xl py-2 px-4 border border-transparent leading-5 rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out'

@@ -4,7 +4,9 @@ class MultiplicationsController < ApplicationController
   before_action :set_multiplication, only: %i[show edit update destroy]
 
   def next
-    @answer = Multiplication.random(current_user).create_answer!(current_user)
+    multiplication = Multiplication.find(params[:id]) if params[:id]
+    multiplication ||= Multiplication.random(current_user)
+    @answer = multiplication.create_answer!(current_user)
   end
 
   # # GET /multiplications
