@@ -1,0 +1,9 @@
+= form_for @addition do |f|
+  - if @addition.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@addition.errors.count, "error")} prohibited this addition from being saved:"
+      ul
+        - @addition.errors.full_messages.each do |message|
+          li = message
+
+  .actions = f.submit
