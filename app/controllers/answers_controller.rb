@@ -85,7 +85,15 @@ class AnswersController < ApplicationController
   protected
 
   def random_congrats_message
-    "#{CONGRATS.sample} #{CONGRATS_EMOJIS.sample}"
+    message = "#{CONGRATS.sample} #{CONGRATS_EMOJIS.sample}"
+
+    add_rockets(message)
+  end
+
+  def add_rockets(message)
+    score = (20 - (@answer.updated_at - @answer.created_at).to_i) / 5
+    message += " #{Array.new(score, '🚀').join('')}" if score.positive?
+    message
   end
 
   def random_missed_message

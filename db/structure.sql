@@ -23,7 +23,8 @@ CREATE TABLE public.answers (
     problem_id bigint NOT NULL,
     text character varying,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    correct boolean
 );
 
 
@@ -266,6 +267,7 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20200515220612'),
 ('20200515224516'),
-('20200515233437');
+('20200515233437'),
+('20200517003426');
 
 

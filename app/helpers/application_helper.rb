@@ -5,10 +5,10 @@ module ApplicationHelper
 
   def flash_class(level)
     alert_type = case level.to_sym
-                 when :congrats then "#{ANIMATIONS.sample} animated"
-                 when :missed then 'bounceIn animated'
+                 when :congrats then "congrats #{ANIMATIONS.sample}"
+                 when :missed then 'missed bounceIn'
                  end
 
-    "alert #{alert_type}"
+    "result-box #{alert_type} animated"
   end
 end
