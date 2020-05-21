@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Addition < Problem
-def self.random(_user)
+  def self.random(_user)
     number2_freq_array = [
       [1, 0],
       [1, 1],
@@ -23,7 +23,7 @@ def self.random(_user)
       [3, 17],
       [3, 18],
       [3, 19],
-      [3, 20],
+      [3, 20]
     ]
 
     number_1 ||= (2..5).to_a.sample
@@ -36,7 +36,7 @@ def self.random(_user)
     end
 
     Addition.find_or_create_by!(number_1: number_1, number_2: number_2, hole_position: [nil, 1, 2].sample)
-  end
+    end
 
   def correct?(answer)
     case hole_position
