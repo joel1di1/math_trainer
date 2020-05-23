@@ -19,4 +19,10 @@ Rails.application.routes.draw do
       get :next
     end
   end
+
+  resources :soustractions, only: [] do
+    collection do
+      get :next
+    end
+  end
 end

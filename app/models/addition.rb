@@ -26,7 +26,7 @@ class Addition < Problem
       [3, 20]
     ]
 
-    number_1 ||= (2..5).to_a.sample
+    number_1 ||= number2_freq_array.reduce([]) { |array, frequence| array += Array.new(frequence.first, frequence.second) }.sample
     number_2 ||= number2_freq_array.reduce([]) { |array, frequence| array += Array.new(frequence.first, frequence.second) }.sample
 
     if [true, false].sample

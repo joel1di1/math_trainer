@@ -22,6 +22,7 @@ html
                   | Dashboard
                 = link_to('Multiplications', next_multiplications_path, class: 'ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700')
                 = link_to('Additions', next_additions_path, class: 'ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700')
+                = link_to('Soustractions', next_soustractions_path, class: 'ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700')
           .hidden.md:block
             .ml-4.flex.items-center.md:ml-6
               button.p-1.border-2.border-transparent.text-gray-400.rounded-full.hover:text-white.focus:outline-none.focus:text-white.focus:bg-gray-700
@@ -30,15 +31,14 @@ html
               |  <div @click.away="open = false" class="ml-3 relative" x-data="{ open: false }">
               div
                 |  <button @click="open = !open" class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid">
-                img.h-8.w-8.rounded-full[src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""]
+                = current_user&.email
               .origin-top-right.absolute.right-0.mt-2.w-48.rounded-md.shadow-lg[x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95"]
                 .py-1.rounded-md.bg-white.shadow-xs
                   a.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100[href="#"]
                     | Your Profile
                   a.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100[href="#"]
                     | Settings
-                  a.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100[href="#"]
-                    | Sign out
+                  = link_to 'Sign out', destroy_user_session_path(class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'), method: :delete
         .-mr-2.flex.md:hidden
           |  <button @click="open = !open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white">
           svg.h-6.w-6[stroke="currentColor" fill="none" viewbox="0 0 24 24"]
