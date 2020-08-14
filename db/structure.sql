@@ -60,6 +60,70 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: card_session_users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.card_session_users (
+    id bigint NOT NULL,
+    problem_id bigint NOT NULL,
+    card_session_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: card_session_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.card_session_users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: card_session_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.card_session_users_id_seq OWNED BY public.card_session_users.id;
+
+
+--
+-- Name: card_sessions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.card_sessions (
+    id bigint NOT NULL,
+    title character varying,
+    user_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: card_sessions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.card_sessions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: card_sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.card_sessions_id_seq OWNED BY public.card_sessions.id;
+
+
+--
 -- Name: problems; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -154,6 +218,20 @@ ALTER TABLE ONLY public.answers ALTER COLUMN id SET DEFAULT nextval('public.answ
 
 
 --
+-- Name: card_session_users id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_session_users ALTER COLUMN id SET DEFAULT nextval('public.card_session_users_id_seq'::regclass);
+
+
+--
+-- Name: card_sessions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_sessions ALTER COLUMN id SET DEFAULT nextval('public.card_sessions_id_seq'::regclass);
+
+
+--
 -- Name: problems id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -181,6 +259,22 @@ ALTER TABLE ONLY public.answers
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: card_session_users card_session_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_session_users
+    ADD CONSTRAINT card_session_users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: card_sessions card_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_sessions
+    ADD CONSTRAINT card_sessions_pkey PRIMARY KEY (id);
 
 
 --
@@ -222,6 +316,27 @@ CREATE INDEX index_answers_on_user_id ON public.answers USING btree (user_id);
 
 
 --
+-- Name: index_card_session_users_on_card_session_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_card_session_users_on_card_session_id ON public.card_session_users USING btree (card_session_id);
+
+
+--
+-- Name: index_card_session_users_on_problem_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_card_session_users_on_problem_id ON public.card_session_users USING btree (problem_id);
+
+
+--
+-- Name: index_card_sessions_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_card_sessions_on_user_id ON public.card_sessions USING btree (user_id);
+
+
+--
 -- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -243,11 +358,35 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 
 --
+-- Name: card_sessions fk_rails_3b3364163f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_sessions
+    ADD CONSTRAINT fk_rails_3b3364163f FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: card_session_users fk_rails_3e252f1e91; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_session_users
+    ADD CONSTRAINT fk_rails_3e252f1e91 FOREIGN KEY (card_session_id) REFERENCES public.card_sessions(id);
+
+
+--
 -- Name: answers fk_rails_584be190c2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.answers
     ADD CONSTRAINT fk_rails_584be190c2 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: card_session_users fk_rails_a6095bd5ec; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_session_users
+    ADD CONSTRAINT fk_rails_a6095bd5ec FOREIGN KEY (problem_id) REFERENCES public.problems(id);
 
 
 --
@@ -268,6 +407,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200515220612'),
 ('20200515224516'),
 ('20200515233437'),
-('20200517003426');
+('20200517003426'),
+('20200814130905'),
+('20200814130935');
 
 

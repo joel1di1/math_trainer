@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @card_session.title
+p
+  strong User:
+  = @card_session.user
+
+=> link_to 'Edit', edit_card_session_path(@card_session)
+'|
+=< link_to 'Back', card_sessions_path
