@@ -13,7 +13,7 @@ class Addition < Problem
       [6, 7],
       [6, 8],
       [6, 9],
-      [44, 10],
+      [44, 10]
       # [3, 11],
       # [3, 12],
       # [3, 13],
@@ -36,7 +36,7 @@ class Addition < Problem
     end
 
     Addition.find_or_create_by!(number_1: number_1, number_2: number_2, hole_position: [nil, 1, 2].sample)
-    end
+  end
 
   def correct?(answer)
     case hole_position

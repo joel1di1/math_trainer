@@ -6,7 +6,7 @@ RSpec.describe Answer, type: :model do
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:problem) }
 
-  let(:problem) { create :addition}
+  let(:problem) { create :addition }
   let(:answer) { create :answer, problem: problem }
 
   it 'cannot be answered twice' do

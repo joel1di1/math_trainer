@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CardSessionsController < ApplicationController
-  before_action :set_card_session, only: [:show, :edit, :update, :destroy]
+  before_action :set_card_session, only: %i[show edit update destroy]
 
   # GET /card_sessions
   # GET /card_sessions.json
@@ -9,8 +11,7 @@ class CardSessionsController < ApplicationController
 
   # GET /card_sessions/1
   # GET /card_sessions/1.json
-  def show
-  end
+  def show; end
 
   # GET /card_sessions/new
   def new
@@ -18,8 +19,7 @@ class CardSessionsController < ApplicationController
   end
 
   # GET /card_sessions/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /card_sessions
   # POST /card_sessions.json
@@ -62,13 +62,14 @@ class CardSessionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_card_session
-      @card_session = CardSession.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def card_session_params
-      params.require(:card_session).permit(:title, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_card_session
+    @card_session = CardSession.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def card_session_params
+    params.require(:card_session).permit(:title, :user_id)
+  end
 end
