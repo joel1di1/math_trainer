@@ -13,17 +13,17 @@ class Addition < Problem
       [6, 7],
       [6, 8],
       [6, 9],
-      [6, 10],
-      [3, 11],
-      [3, 12],
-      [3, 13],
-      [3, 14],
-      [3, 15],
-      [3, 16],
-      [3, 17],
-      [3, 18],
-      [3, 19],
-      [3, 20]
+      [44, 10],
+      # [3, 11],
+      # [3, 12],
+      # [3, 13],
+      # [3, 14],
+      # [3, 15],
+      # [3, 16],
+      # [3, 17],
+      # [3, 18],
+      # [3, 19],
+      # [3, 20]
     ]
 
     number_1 ||= number2_freq_array.reduce([]) { |array, frequence| array += Array.new(frequence.first, frequence.second) }.sample

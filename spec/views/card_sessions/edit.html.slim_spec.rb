@@ -15,7 +15,7 @@ RSpec.describe "card_sessions/edit", type: :view do
 
       assert_select "input[name=?]", "card_session[title]"
 
-      assert_select "input[name=?]", "card_session[user_id]"
+      assert_select "input[name=?]", "card_session[user]"
     end
   end
 end

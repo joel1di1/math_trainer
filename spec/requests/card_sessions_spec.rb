@@ -15,6 +15,9 @@
 RSpec.describe "/card_sessions", type: :request do
   # CardSession. As you add validations to CardSession, be sure to
   # adjust the attributes here as well.
+
+before { sign_in(create(:user)) }
+
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
   }

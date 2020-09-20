@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :card_sessions
+  resources :card_sessions do
+    member do
+      get :next
+    end
+  end
   devise_for :users
   root 'home#index'
 
