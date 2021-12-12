@@ -47,17 +47,23 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       @answer.update!(answer_params)
-      path_method = "next_#{@answer.problem.type.downcase}s_path"
       if @answer.correct?
         flash[:congrats] = random_congrats_message
-        path = send path_method
       else
         flash[:missed] = random_missed_message
-        path = send path_method, id: @answer.problem
       end
-      format.html { redirect_to path }
+      format.html { redirect_to next_path }
       format.json { render :show, status: :ok, location: @answer }
     end
+  end
+
+  def next_path
+    path_method = "next_#{@answer.problem.type.downcase}s_path"
+    path = @answer.correct? ? send(path_method) : send(path_method, id: @answer.problem)
+
+    path = next_card_session_path(id: params[:card_session_id]) if params[:card_session_id].present?
+
+    path
   end
 
   # DELETE /answers/1
@@ -92,7 +98,7 @@ class AnswersController < ApplicationController
 
   def add_rockets(message)
     score = (20 - (@answer.updated_at - @answer.created_at).to_i) / 5
-    message += " #{Array.new(score, '🚀').join('')}" if score.positive?
+    message += " #{Array.new(score, ['🚀','👹','👺','🤡','💩','a','👽','😺','🤴','🧑‍🎓','👻','👾','🤖','🎃','💀','☠️','🤮'].sample).join('')}" if score.positive?
     message
   end
 

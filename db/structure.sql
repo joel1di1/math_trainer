@@ -24,7 +24,8 @@ CREATE TABLE public.answers (
     text character varying,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    correct boolean
+    correct boolean,
+    card_session_id bigint
 );
 
 
@@ -302,6 +303,13 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: index_answers_on_card_session_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_answers_on_card_session_id ON public.answers USING btree (card_session_id);
+
+
+--
 -- Name: index_answers_on_problem_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -358,6 +366,14 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 
 --
+-- Name: answers fk_rails_341789c96b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.answers
+    ADD CONSTRAINT fk_rails_341789c96b FOREIGN KEY (card_session_id) REFERENCES public.card_sessions(id);
+
+
+--
 -- Name: card_sessions fk_rails_3b3364163f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -410,6 +426,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200517003426'),
 ('20200814130905'),
 ('20200814130935'),
-('20200920152051');
+('20200920152051'),
+('20200920165430');
 
 

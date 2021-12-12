@@ -11,4 +11,6 @@
 .text-center
   div
     = form_with(model: @answer, local: true) do |form|
-      = render partial: @answer.problem.type.downcase, locals: { problem: @answer.problem, form: form }
+      - type_name = @answer.problem.type.downcase
+      - partial_name = "#{type_name}s/#{type_name}"
+      = render partial: partial_name, locals: { problem: @answer.problem, form: form }

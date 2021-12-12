@@ -11,7 +11,7 @@ class Problem < ApplicationRecord
     raise "correct? not implemented for #{self.class}."
   end
 
-  def create_answer!(user)
-    Answer.create!(user: user, problem: self)
+  def create_answer!(user, card_session: nil)
+    Answer.create!(user: user, problem: self, card_session: card_session)
   end
 end

@@ -35,5 +35,9 @@ RSpec.describe CardSessionsController, type: :routing do
     it 'routes to #destroy' do
       expect(delete: '/card_sessions/1').to route_to('card_sessions#destroy', id: '1')
     end
+
+    it 'routes to #next' do
+      expect(get: '/card_sessions/1/next').to route_to('card_sessions#next', id: '1')
+    end
   end
 end

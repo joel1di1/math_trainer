@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     member do
       get :next
     end
+    resources :answers, only: :update
   end
   devise_for :users
   root 'home#index'

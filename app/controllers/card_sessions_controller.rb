@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CardSessionsController < ApplicationController
-  before_action :set_card_session, only: %i[show edit update destroy]
+  before_action :set_card_session, only: %i[show edit update destroy next]
 
   # GET /card_sessions
   # GET /card_sessions.json
@@ -59,6 +59,10 @@ class CardSessionsController < ApplicationController
       format.html { redirect_to card_sessions_url, notice: 'Card session was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def next
+    @answer = @card_session.next&.create_answer!(current_user, card_session: @card_session)
   end
 
   private

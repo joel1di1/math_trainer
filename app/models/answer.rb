@@ -3,6 +3,7 @@
 class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :problem
+  belongs_to :card_session, optional: true
 
   validates_presence_of :user, :problem
   validate :only_one_answer, on: :update
