@@ -46,14 +46,20 @@ class AnswersController < ApplicationController
   # PATCH/PUT /answers/1.json
   def update
     respond_to do |format|
-      @answer.update!(answer_params)
-      if @answer.correct?
-        flash[:congrats] = random_congrats_message
+
+      if params[:answer][:text].blank?
+        format.html { redirect_to next_path, notice: 'Blank answer detected' }
+        format.json { render :show, status: :ok, location: @answer }
       else
-        flash[:missed] = random_missed_message
+        @answer.update!(answer_params)
+        if @answer.correct?
+          flash[:congrats] = random_congrats_message
+        else
+          flash[:missed] = random_missed_message
+        end
+        format.html { redirect_to next_path }
+        format.json { render :show, status: :ok, location: @answer }
       end
-      format.html { redirect_to next_path }
-      format.json { render :show, status: :ok, location: @answer }
     end
   end
 
