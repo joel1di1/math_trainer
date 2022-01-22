@@ -57,14 +57,21 @@ class TimeSessionsController < ApplicationController
   end
 
   def start
+    redirect_to next_time_session_path(@time_session)
+  end
 
+  def next
+    problem = @time_session.next_problem
+    @answer = problem.create_answer!(current_user)
+
+    render 'problems/next'
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_time_session
-    @time_session = TimeSession.find(params[:id])
+    @time_session = TimeSession.find(params[:session_id] || params[:id])
   end
 
   # Only allow a list of trusted parameters through.

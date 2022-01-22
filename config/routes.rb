@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :time_sessions do
     member do
       post :start
+      get :next
     end
   end
   resources :card_sessions do

@@ -27,5 +27,8 @@ describe 'time session', type: :feature do
     expect(current_path).to eq(time_session_path(TimeSession.last))
 
     click_on 'Commencer!'
+
+    time_session = TimeSession.last
+    expect(current_path).to eq("/time_sessions/#{time_session.id}/next")
   end
 end
