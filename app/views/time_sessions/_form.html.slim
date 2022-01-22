@@ -9,9 +9,9 @@
   .field
     = f.label :minutes
     = f.number_field :minutes
-  / .field
-  /   = f.label :operation_types
-  /   = f.text_field :operation_types
+  .field
+    = f.label :operation_types
+    = f.select :operation_types, ['additions', 'soustractions', 'multiplications', 'divisions']
   / .field
   /   = f.label :frequencies
   /   = f.text_field :frequencies

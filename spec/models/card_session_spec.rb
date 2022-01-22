@@ -36,10 +36,11 @@ RSpec.describe CardSession, type: :model do
       problem_1 = create :addition, number_1: 2, number_2: 3
       problem_2 = create :addition, number_1: 5, number_2: 4
       card_session.problems = [problem_1, problem_2]
-      assert = card_session.next
-      answer = first_problem.create_answer!(user)
-      answer.update!(text: )
-      fir
+
+      # assert = card_session.next
+      # answer = first_problem.create_answer!(user)
+      # answer.update!(text: )
+      # fir
     end
   end
 end
