@@ -1,0 +1,18 @@
+= form_for @time_session do |f|
+  - if @time_session.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@time_session.errors.count, 'error')} prohibited this time_session from being saved:"
+      ul
+        - @time_session.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :minutes
+    = f.number_field :minutes
+  / .field
+  /   = f.label :operation_types
+  /   = f.text_field :operation_types
+  / .field
+  /   = f.label :frequencies
+  /   = f.text_field :frequencies
+  .actions = f.submit

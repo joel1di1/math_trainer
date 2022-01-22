@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :time_sessions
   resources :card_sessions do
     member do
       get :next
@@ -15,6 +16,12 @@ Rails.application.routes.draw do
   resources :answers, only: :update
 
   resources :multiplications, only: [] do
+    collection do
+      get :next
+    end
+  end
+
+  resources :divisions, only: [] do
     collection do
       get :next
     end

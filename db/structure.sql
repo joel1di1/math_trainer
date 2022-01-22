@@ -11,8 +11,6 @@ SET row_security = off;
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
-
 --
 -- Name: answers; Type: TABLE; Schema: public; Owner: -
 --
@@ -168,6 +166,40 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: time_sessions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.time_sessions (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    minutes integer,
+    operation_types character varying,
+    frequencies character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: time_sessions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.time_sessions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: time_sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.time_sessions_id_seq OWNED BY public.time_sessions.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -240,6 +272,13 @@ ALTER TABLE ONLY public.problems ALTER COLUMN id SET DEFAULT nextval('public.pro
 
 
 --
+-- Name: time_sessions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.time_sessions ALTER COLUMN id SET DEFAULT nextval('public.time_sessions_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -295,6 +334,14 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: time_sessions time_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.time_sessions
+    ADD CONSTRAINT time_sessions_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -342,6 +389,13 @@ CREATE INDEX index_card_session_problems_on_problem_id ON public.card_session_pr
 --
 
 CREATE INDEX index_card_sessions_on_user_id ON public.card_sessions USING btree (user_id);
+
+
+--
+-- Name: index_time_sessions_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_time_sessions_on_user_id ON public.time_sessions USING btree (user_id);
 
 
 --
@@ -406,6 +460,14 @@ ALTER TABLE ONLY public.card_session_problems
 
 
 --
+-- Name: time_sessions fk_rails_a7e0badd86; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.time_sessions
+    ADD CONSTRAINT fk_rails_a7e0badd86 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- Name: answers fk_rails_b6b51e72e3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -427,6 +489,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200814130905'),
 ('20200814130935'),
 ('20200920152051'),
-('20200920165430');
+('20200920165430'),
+('20211230112526');
 
 

@@ -1,0 +1,27 @@
+h1 Listing time_sessions
+
+table
+  thead
+    tr
+      th User
+      th Minutes
+      th Operation types
+      th Frequencies
+      th
+      th
+      th
+
+  tbody
+    - @time_sessions.each do |time_session|
+      tr
+        td = time_session.user
+        td = time_session.minutes
+        td = time_session.operation_types
+        td = time_session.frequencies
+        td = link_to 'Show', time_session
+        td = link_to 'Edit', edit_time_session_path(time_session)
+        td = link_to 'Destroy', time_session, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Time session', new_time_session_path
