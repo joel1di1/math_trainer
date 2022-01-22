@@ -10,7 +10,7 @@ class CardSession < ApplicationRecord
     card_session = CardSession.create!(user: user)
     range_as_array = get_range_as_array(range)
     card_session.problems = range_as_array.map do |number|
-      (0..10).map do |number_2|
+      (0..10).map do |_number_2|
         Addition.find_or_create_by!(number_1: number, number_2: (1..10).to_a.sample, hole_position: [nil, 1, 2].sample)
       end
     end.flatten
@@ -23,7 +23,7 @@ class CardSession < ApplicationRecord
 
   def next
     problems.find do |problem|
-      !(self.answers.where(problem: problem).where(correct: true).count >= 1)
+      answers.where(problem: problem).where(correct: true).count < 1
     end
   end
 end

@@ -12,11 +12,13 @@ class Division < Problem
       [1, 7],
       [1, 8],
       [1, 9],
-      [1, 10],
+      [1, 10]
     ]
 
     number_1 ||= (2..9).to_a.sample
-    number_2 ||= number2_freq_array.reduce([]) { |array, frequence| array += Array.new(frequence.first, frequence.second) }.sample
+    number_2 ||= number2_freq_array.reduce([]) do |array, frequence|
+      array += Array.new(frequence.first, frequence.second)
+    end.sample
     product = number_1 * number_2
 
     if [true, false].sample

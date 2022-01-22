@@ -26,8 +26,12 @@ class Addition < Problem
       # [3, 20]
     ]
 
-    number_1 ||= number2_freq_array.reduce([]) { |array, frequence| array += Array.new(frequence.first, frequence.second) }.sample
-    number_2 ||= number2_freq_array.reduce([]) { |array, frequence| array += Array.new(frequence.first, frequence.second) }.sample
+    number_1 ||= number2_freq_array.reduce([]) do |array, frequence|
+      array += Array.new(frequence.first, frequence.second)
+    end.sample
+    number_2 ||= number2_freq_array.reduce([]) do |array, frequence|
+      array += Array.new(frequence.first, frequence.second)
+    end.sample
 
     if [true, false].sample
       tmp = number_1

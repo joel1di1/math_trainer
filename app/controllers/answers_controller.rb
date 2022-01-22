@@ -46,10 +46,8 @@ class AnswersController < ApplicationController
   # PATCH/PUT /answers/1.json
   def update
     respond_to do |format|
-
       if params[:answer][:text].blank?
         format.html { redirect_to next_path, notice: 'Blank answer detected' }
-        format.json { render :show, status: :ok, location: @answer }
       else
         @answer.update!(answer_params)
         if @answer.correct?
@@ -58,8 +56,8 @@ class AnswersController < ApplicationController
           flash[:missed] = random_missed_message
         end
         format.html { redirect_to next_path }
-        format.json { render :show, status: :ok, location: @answer }
       end
+      format.json { render :show, status: :ok, location: @answer }
     end
   end
 
@@ -104,7 +102,11 @@ class AnswersController < ApplicationController
 
   def add_rockets(message)
     score = (20 - (@answer.updated_at - @answer.created_at).to_i) / 5
-    message += " #{Array.new(score, ['🚀','👹','👺','🤡','💩','a','👽','😺','🤴','🧑‍🎓','👻','👾','🤖','🎃','💀','☠️','🤮'].sample).join('')}" if score.positive?
+    if score.positive?
+      message += " #{Array.new(score,
+                               ['🚀', '👹', '👺', '🤡', '💩', 'a', '👽', '😺', '🤴', '🧑‍🎓', '👻', '👾', '🤖', '🎃', '💀', '☠️',
+                                '🤮'].sample).join('')}"
+    end
     message
   end
 

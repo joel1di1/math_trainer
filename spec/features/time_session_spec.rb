@@ -10,7 +10,7 @@ describe 'time session', type: :feature do
   end
 
   it 'create a new time session' do
-    visit "/"
+    visit '/'
 
     expect(page).to have_text('Time Sessions')
     click_on 'Time Sessions'

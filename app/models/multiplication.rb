@@ -11,7 +11,7 @@ class Multiplication < Problem
       # [4, 5],
       [6, 6],
       [6, 7],
-      [6, 8],
+      [6, 8]
       # [6, 9],
       # [6, 10],
       # [2, 11],
@@ -19,7 +19,9 @@ class Multiplication < Problem
     ]
 
     number_1 ||= (2..9).to_a.sample
-    number_2 ||= number2_freq_array.reduce([]) { |array, frequence| array += Array.new(frequence.first, frequence.second) }.sample
+    number_2 ||= number2_freq_array.reduce([]) do |array, frequence|
+      array += Array.new(frequence.first, frequence.second)
+    end.sample
 
     if [true, false].sample
       tmp = number_1

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTimeSessions < ActiveRecord::Migration[6.0]
   def change
     create_table :time_sessions do |t|
