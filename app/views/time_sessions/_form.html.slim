@@ -11,7 +11,7 @@
     = f.number_field :minutes
   .field
     = f.label :operation_types
-    = f.select :operation_types, ['additions', 'soustractions', 'multiplications', 'divisions']
+    = f.select :operation_types, ['additions', 'soustractions', 'multiplications', 'divisions'], {}, {multiple: true}
   / .field
   /   = f.label :frequencies
   /   = f.text_field :frequencies

@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :time_sessions
+  resources :time_sessions do
+    member do
+      post :start
+    end
+  end
   resources :card_sessions do
     member do
       get :next

@@ -15,6 +15,8 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/time_sessions', type: :request do
+  before { sign_in(create(:user)) }
+
   # TimeSession. As you add validations to TimeSession, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do

@@ -3,12 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe CardSession, type: :model do
+  let(:user) { create :user }
+
   describe '.build_addition' do
     let(:range) { 0 }
     subject(:card_session) { CardSession.build_addition(range: range, user: user) }
 
     context 'with specified user' do
-      let(:user) { create :user }
 
       it { expect(card_session.user).to eq(user) }
 
