@@ -24,6 +24,7 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-its'
   gem 'rspec-rails'
+  gem 'rubocop-rspec'
   gem 'slim-rails'
   gem 'spring-commands-rspec'
 end

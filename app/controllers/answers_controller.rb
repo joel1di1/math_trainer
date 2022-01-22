@@ -105,7 +105,7 @@ class AnswersController < ApplicationController
     if score.positive?
       message += " #{Array.new(score,
                                ['🚀', '👹', '👺', '🤡', '💩', 'a', '👽', '😺', '🤴', '🧑‍🎓', '👻', '👾', '🤖', '🎃', '💀', '☠️',
-                                '🤮'].sample).join('')}"
+                                '🤮'].sample).join}"
     end
     message
   end

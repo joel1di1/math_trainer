@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Multiplication, type: :model do # rubocop:disable Metrics/BlockLength
+RSpec.describe Multiplication, type: :model do
   let(:multiplication) { create :multiplication }
   let(:user) { create :user }
 
@@ -16,7 +16,7 @@ RSpec.describe Multiplication, type: :model do # rubocop:disable Metrics/BlockLe
 
     context 'generated numbers' do
       let(:answer) { Answer.new(text: (multiplication.number_1 * multiplication.number_2).to_s) }
-      let(:false_answer) { Answer.new(text: (multiplication.number_1 * multiplication.number_2 - 1).to_s) }
+      let(:false_answer) { Answer.new(text: ((multiplication.number_1 * multiplication.number_2) - 1).to_s) }
 
       it { expect(multiplication.correct?(answer)).to be true }
       it { expect(multiplication.correct?(false_answer)).to be false }

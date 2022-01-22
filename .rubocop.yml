@@ -4,6 +4,7 @@ AllCops:
   Exclude:
     - 'bin/*'
     - 'node_modules/**/*'
+  NewCops: enable
 
 Style/Documentation:
   Enabled: false
@@ -16,24 +17,13 @@ Metrics/MethodLength:
   Exclude:
     - 'db/migrate/*'
 
-Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: true
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
-Lint/RaiseException:
-  Enabled: true
-Lint/StructNewOverride:
-  Enabled: true
-Style/ExponentialNotation:
-  Enabled: true
-Style/HashEachMethods:
-  Enabled: true
-Style/HashTransformKeys:
-  Enabled: true
-Style/HashTransformValues:
-  Enabled: true
-Style/SlicingWithRange:
-  Enabled: true
-
 Layout/LineLength:
   Max: 120
+
+Metrics/BlockLength:
+  Max: 30
+  Exclude:
+    - 'spec/**/*'
+
+Naming/VariableNumber:
+  Enabled: false
