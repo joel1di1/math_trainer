@@ -10,8 +10,8 @@ class Problem < ApplicationRecord
   end
 
   def self.random_with_frequency(frequency_array)
-    frequency_array.reduce([]) do |array, frequence|
-      array.concat(Array.new(frequence.first, frequence.second))
+    frequency_array.each_with_object([]) do |frequence, array|
+      frequence.first.times { array << frequence.second }
     end.sample
   end
 

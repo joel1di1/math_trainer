@@ -47,6 +47,38 @@ ALTER SEQUENCE public.answers_id_seq OWNED BY public.answers.id;
 
 
 --
+-- Name: answers_sessions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.answers_sessions (
+    id bigint NOT NULL,
+    answer_id bigint NOT NULL,
+    time_session_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: answers_sessions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.answers_sessions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: answers_sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.answers_sessions_id_seq OWNED BY public.answers_sessions.id;
+
+
+--
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -251,6 +283,13 @@ ALTER TABLE ONLY public.answers ALTER COLUMN id SET DEFAULT nextval('public.answ
 
 
 --
+-- Name: answers_sessions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.answers_sessions ALTER COLUMN id SET DEFAULT nextval('public.answers_sessions_id_seq'::regclass);
+
+
+--
 -- Name: card_session_problems id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -291,6 +330,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.answers
     ADD CONSTRAINT answers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: answers_sessions answers_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.answers_sessions
+    ADD CONSTRAINT answers_sessions_pkey PRIMARY KEY (id);
 
 
 --
@@ -371,6 +418,20 @@ CREATE INDEX index_answers_on_user_id ON public.answers USING btree (user_id);
 
 
 --
+-- Name: index_answers_sessions_on_answer_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_answers_sessions_on_answer_id ON public.answers_sessions USING btree (answer_id);
+
+
+--
+-- Name: index_answers_sessions_on_time_session_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_answers_sessions_on_time_session_id ON public.answers_sessions USING btree (time_session_id);
+
+
+--
 -- Name: index_card_session_problems_on_card_session_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -420,6 +481,14 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 
 --
+-- Name: answers_sessions fk_rails_1b633a06ac; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.answers_sessions
+    ADD CONSTRAINT fk_rails_1b633a06ac FOREIGN KEY (answer_id) REFERENCES public.answers(id);
+
+
+--
 -- Name: answers fk_rails_341789c96b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -441,6 +510,14 @@ ALTER TABLE ONLY public.card_sessions
 
 ALTER TABLE ONLY public.card_session_problems
     ADD CONSTRAINT fk_rails_3e252f1e91 FOREIGN KEY (card_session_id) REFERENCES public.card_sessions(id);
+
+
+--
+-- Name: answers_sessions fk_rails_4140d59875; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.answers_sessions
+    ADD CONSTRAINT fk_rails_4140d59875 FOREIGN KEY (time_session_id) REFERENCES public.time_sessions(id);
 
 
 --
@@ -490,6 +567,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200814130935'),
 ('20200920152051'),
 ('20200920165430'),
-('20211230112526');
+('20211230112526'),
+('20220123194342');
 
 

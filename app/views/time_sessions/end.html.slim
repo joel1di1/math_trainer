@@ -1,1 +1,20 @@
-h2 La session est finie!
+container
+  h2.p-6.text-2xl.font-bold La session est finie!
+  dl.mt-5.grid.grid-cols-1.gap-5.sm:grid-cols-3.p-6
+
+    .px-4.py-5.bg-white.shadow.rounded-lg.overflow-hidden.sm:p-6
+      dt.text-sm.font-medium.text-gray-500.truncate
+        |  Nombre de réponses
+      dd.mt-1.text-3xl.font-semibold.text-gray-900
+        = @time_session.answered_count
+    .px-4.py-5.bg-white.shadow.rounded-lg.overflow-hidden.sm:p-6
+      dt.text-sm.font-medium.text-gray-500.truncate
+        | Bonnes réponses
+      dd.mt-1.text-3xl.font-semibold.text-gray-900
+        = @time_session.answers.correct.count
+        = " (#{format('%<num>0.0f', num: @time_session.correct_rate)}%)"
+    .px-4.py-5.bg-white.shadow.rounded-lg.overflow-hidden.sm:p-6
+      dt.text-sm.font-medium.text-gray-500.truncate
+        |  Avg. Click Rate
+      dd.mt-1.text-3xl.font-semibold.text-gray-900
+        |  24.57%

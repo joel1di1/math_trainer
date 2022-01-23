@@ -4,15 +4,15 @@ class Addition < Problem
   FREQUENCIES = [
     [1, 0],
     [1, 1],
-    [4, 2],
-    [4, 3],
-    [4, 4],
-    [4, 5],
+    [3, 2],
+    [3, 3],
+    [3, 4],
+    [3, 5],
     [6, 6],
     [6, 7],
     [6, 8],
     [6, 9],
-    [44, 10]
+    [2, 10]
     # [3, 11],
     # [3, 12],
     # [3, 13],
@@ -26,14 +26,10 @@ class Addition < Problem
   ].freeze
 
   def self.random(_user)
-    number_1 ||= FREQUENCIES.reduce([]) do |array, frequence|
-      array + [frequence.first, frequence.second]
-    end.sample
-    number_2 ||= FREQUENCIES.reduce([]) do |array, frequence|
-      array + [frequence.first, frequence.second]
-    end.sample
+    number_1 = random_with_frequency(FREQUENCIES)
+    number_2 = random_with_frequency(FREQUENCIES)
 
-    number_1, number_2 = number_2, number_1 if [true, false].sample
+    number_1, number_2 = number_2, number_1 if Random.random_number * 2 > 1
 
     Addition.find_or_create_by!(number_1:, number_2:, hole_position: [nil, 1, 2].sample)
   end

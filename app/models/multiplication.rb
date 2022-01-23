@@ -2,23 +2,21 @@
 
 class Multiplication < Problem
   FREQUENCIES = [
-    # [1, 1],
-    # [1, 2],
-    # [1, 3],
-    # [1, 4],
-    # [1, 5],
-    [1, 6],
-    [1, 7],
-    [1, 8]
-    # [1, 9],
-    # [1, 10]
+    [1, 1],
+    [1, 2],
+    [3, 3],
+    [3, 4],
+    [3, 5],
+    [6, 6],
+    [6, 7],
+    [6, 8],
+    [4, 9],
+    [2, 10]
   ].freeze
 
   def self.random(_user)
-    number_1 ||= (2..9).to_a.sample
-    number_2 ||= FREQUENCIES.reduce([]) do |array, frequence|
-      array + [frequence.first, frequence.second]
-    end.sample
+    number_1 ||= random_with_frequency(FREQUENCIES)
+    number_2 ||= random_with_frequency(FREQUENCIES)
 
     number_1, number_2 = number_2, number_1 if [true, false].sample
 

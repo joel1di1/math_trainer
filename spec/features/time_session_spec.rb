@@ -26,7 +26,7 @@ describe 'time session', type: :feature do
     expect { click_on 'Create Time session' }.to change(TimeSession, :count).by(1)
     expect(current_path).to eq(time_session_path(TimeSession.last))
 
-    click_on 'Commencer!'
+    expect { click_on 'Commencer!' }.to change(TimeSession.last.answers.reload, :count).by(1)
 
     time_session = TimeSession.last
     expect(current_path).to eq("/time_sessions/#{time_session.id}/next")

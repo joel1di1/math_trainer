@@ -10,6 +10,9 @@ class Answer < ApplicationRecord
 
   before_update :set_correctnes!
 
+  scope :answered, -> { where.not(text: nil) }
+  scope :correct, -> { where(correct: true) }
+
   def correct?
     problem.correct?(self)
   end

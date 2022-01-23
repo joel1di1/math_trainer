@@ -2,6 +2,8 @@
 
 class TimeSession < ApplicationRecord
   belongs_to :user
+  has_many :answers_sessions, dependent: :destroy
+  has_many :answers, through: :answers_sessions
 
   def next_problem
     return Problem.operation_types.sample.random(user) if operation_types.blank?
@@ -11,5 +13,13 @@ class TimeSession < ApplicationRecord
 
   def ended?
     Time.zone.now > created_at + minutes.minutes
+  end
+
+  def answered_count
+    answers.answered.count
+  end
+
+  def correct_rate
+    answers.correct.count.to_f * 100 / answered_count
   end
 end

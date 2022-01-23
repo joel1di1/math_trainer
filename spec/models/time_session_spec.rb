@@ -42,4 +42,30 @@ RSpec.describe TimeSession, type: :model do
       end
     end
   end
+
+  describe '#answered_count' do
+    it 'counts only answered answers' do
+      time_session.answers << create(:answer, user: time_session.user, text: 'yes', correct: true)
+      time_session.answers << create(:answer, user: time_session.user, text: 'no', correct: false)
+      time_session.answers << create(:answer, user: time_session.user, text: nil)
+
+      expect(time_session.answered_count).to eq(2)
+    end
+  end
+
+  describe '#correct_rate' do
+    subject(:correct_rate) { time_session.correct_rate }
+
+    context 'with one good answer over one' do
+      before { time_session.answers << create(:answer, user: time_session.user, text: 'yes', correct: true) }
+      it { expect(correct_rate).to eq(100) }
+    end
+
+    context 'with one good answer over two' do
+      before { time_session.answers << create(:answer, user: time_session.user, text: 'yes', correct: true) }
+      before { time_session.answers << create(:answer, user: time_session.user, text: 'no', correct: false) }
+
+      it { expect(correct_rate).to eq(50) }
+    end
+  end
 end

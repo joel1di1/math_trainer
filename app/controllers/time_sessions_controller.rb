@@ -5,7 +5,7 @@ class TimeSessionsController < ApplicationController
 
   # GET /time_sessions or /time_sessions.json
   def index
-    @time_sessions = current_user.time_sessions
+    @time_sessions = current_user.time_sessions.order(created_at: :desc)
   end
 
   # GET /time_sessions/1 or /time_sessions/1.json
@@ -21,7 +21,9 @@ class TimeSessionsController < ApplicationController
 
   # POST /time_sessions or /time_sessions.json
   def create
-    @time_session = TimeSession.new(time_session_params.merge(user: current_user))
+    @time_session = TimeSession.new(time_session_params)
+    @time_session.user = current_user
+    @time_session.operation_types = params[:time_session][:operation_types].select(&:present?)
 
     respond_to do |format|
       if @time_session.save
@@ -65,6 +67,7 @@ class TimeSessionsController < ApplicationController
 
     problem = @time_session.next_problem
     @answer = problem.create_answer!(current_user)
+    @time_session.answers << @answer
 
     render 'problems/next'
   end
@@ -75,11 +78,11 @@ class TimeSessionsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_time_session
-    @time_session = TimeSession.find(params[:session_id] || params[:id])
+    @time_session = current_user.time_sessions.find(params[:session_id] || params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def time_session_params
-    params.require(:time_session).permit(:user_id, :minutes, :operation_types, :frequencies)
+    params.require(:time_session).permit(:minutes, :operation_types, :frequencies)
   end
 end
