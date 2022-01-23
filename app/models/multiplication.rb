@@ -22,7 +22,7 @@ class Multiplication < Problem
 
     number_1, number_2 = number_2, number_1 if [true, false].sample
 
-    Multiplication.find_or_create_by!(number_1: number_1, number_2: number_2, hole_position: [nil, 1, 2].sample)
+    Multiplication.find_or_create_by!(number_1:, number_2:, hole_position: [nil, 1, 2].sample)
   end
 
   def correct?(answer)

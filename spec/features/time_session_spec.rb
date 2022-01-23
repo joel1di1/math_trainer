@@ -20,8 +20,8 @@ describe 'time session', type: :feature do
     click_on 'New Time session'
 
     fill_in('Minutes', with: 5)
-    select 'additions', from: 'Operation types'
-    select 'multiplications', from: 'Operation types'
+    select 'Addition', from: 'Operation types'
+    select 'Multiplication', from: 'Operation types'
 
     expect { click_on 'Create Time session' }.to change(TimeSession, :count).by(1)
     expect(current_path).to eq(time_session_path(TimeSession.last))

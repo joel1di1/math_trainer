@@ -7,10 +7,9 @@ RSpec.describe CardSession, type: :model do
 
   describe '.build_addition' do
     let(:range) { 0 }
-    subject(:card_session) { CardSession.build_addition(range: range, user: user) }
+    subject(:card_session) { CardSession.build_addition(range:, user:) }
 
     context 'with specified user' do
-
       it { expect(card_session.user).to eq(user) }
 
       # CardSession.build_addition([4, 5])

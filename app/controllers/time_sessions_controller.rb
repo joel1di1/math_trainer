@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TimeSessionsController < ApplicationController
-  before_action :set_time_session, only: %i[show edit update destroy start]
+  before_action :set_time_session, only: %i[show edit update destroy start next]
 
   # GET /time_sessions or /time_sessions.json
   def index

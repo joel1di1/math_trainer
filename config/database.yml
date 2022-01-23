@@ -6,12 +6,18 @@ default: &default
   pool: <%= ENV.fetch('RAILS_MAX_THREADS', 5) %>
 
 development:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV.fetch('POSTGRES_HOST', 'localhost') %>
+  port: <%= ENV.fetch('POSTGRES_PORT', 5432) %>
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS', 5) %>
   database: math_trainer_development
 
 test:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV.fetch('POSTGRES_HOST', 'localhost') %>
+  port: <%= ENV.fetch('POSTGRES_PORT', 5432) %>
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS', 5) %>
   database: math_trainer_test
 
-production:
-  url: <%= ENV['DATABASE_URL'] %>

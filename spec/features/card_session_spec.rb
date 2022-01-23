@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'card session', type: :feature do
   let(:user) { create :user }
-  let(:card_session) { CardSession.build_addition(range: (4..5), user: user) }
+  let(:card_session) { CardSession.build_addition(range: (4..5), user:) }
 
   before :each do
     sign_in user

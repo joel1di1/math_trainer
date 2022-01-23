@@ -23,7 +23,7 @@ class Division < Problem
 
     number_2 = number_1 if [true, false].sample
 
-    Division.find_or_create_by!(number_1: product, number_2: number_2, hole_position: [nil, 1, 2].sample)
+    Division.find_or_create_by!(number_1: product, number_2:, hole_position: [nil, 1, 2].sample)
   end
 
   def correct?(answer)

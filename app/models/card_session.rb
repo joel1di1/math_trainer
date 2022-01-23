@@ -7,7 +7,7 @@ class CardSession < ApplicationRecord
   has_many :answers, inverse_of: :card_session
 
   def self.build_addition(range:, user:)
-    card_session = CardSession.create!(user: user)
+    card_session = CardSession.create!(user:)
     range_as_array = get_range_as_array(range)
     card_session.problems = range_as_array.map do |number|
       (0..10).map do |_number_2|
@@ -23,7 +23,7 @@ class CardSession < ApplicationRecord
 
   def next
     problems.find do |problem|
-      answers.where(problem: problem).where(correct: true).count < 1
+      answers.where(problem:).where(correct: true).count < 1
     end
   end
 end

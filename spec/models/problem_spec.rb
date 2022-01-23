@@ -20,4 +20,17 @@ RSpec.describe Problem, type: :model do
     its(:id) { should be_truthy }
     its(:text) { should be_nil }
   end
+
+  describe '.operation_types_s' do
+    subject(:operation_types) { Problem.operation_types_s }
+    it { expect(operation_types).to include('Addition') }
+  end
+
+  describe '.operation_types' do
+    subject(:operation_types) { Problem.operation_types }
+    it { expect(operation_types).to include(Addition) }
+    it { expect(operation_types).to include(Multiplication) }
+    it { expect(operation_types).to include(Division) }
+    it { expect(operation_types).to include(Soustraction) }
+  end
 end
