@@ -22,5 +22,7 @@ module MathTrainer
 
     config.generators.assets = false
     config.generators.helper = false
+
+    config.time_zone = 'Paris'
   end
 end

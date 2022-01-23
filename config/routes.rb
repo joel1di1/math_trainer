@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     member do
       post :start
       get :next
+      get :end
     end
   end
   resources :card_sessions do

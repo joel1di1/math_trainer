@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class TimeSessionsController < ApplicationController
-  before_action :set_time_session, only: %i[show edit update destroy start next]
+  before_action :set_time_session, only: %i[show edit update destroy start next end]
 
   # GET /time_sessions or /time_sessions.json
   def index
-    @time_sessions = TimeSession.all
+    @time_sessions = current_user.time_sessions
   end
 
   # GET /time_sessions/1 or /time_sessions/1.json
@@ -61,11 +61,15 @@ class TimeSessionsController < ApplicationController
   end
 
   def next
+    return redirect_to(end_time_session_path(@time_session)) if @time_session.ended?
+
     problem = @time_session.next_problem
     @answer = problem.create_answer!(current_user)
 
     render 'problems/next'
   end
+
+  def end; end
 
   private
 

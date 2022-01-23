@@ -13,4 +13,5 @@
     = form_with(model: @answer, local: true) do |form|
       - type_name = @answer.problem.type.downcase
       - partial_name = "#{type_name}s/#{type_name}"
+      = hidden_field_tag :time_session_id, @time_session.id if @time_session.present?
       = render partial: partial_name, locals: { problem: @answer.problem, form: form }

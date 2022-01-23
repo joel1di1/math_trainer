@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   has_many :answers
+  has_many :time_sessions
 
   def current_streak
     streak = 0

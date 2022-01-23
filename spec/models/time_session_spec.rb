@@ -31,4 +31,15 @@ RSpec.describe TimeSession, type: :model do
       it { expect(next_problem).to be_kind_of(Problem) }
     end
   end
+
+  describe '#ended?' do
+    it 'ends after minutes after create' do
+      Timecop.travel(time_session.created_at) do
+        assert !time_session.ended?
+      end
+      Timecop.travel(time_session.created_at + (time_session.minutes + 1).minutes) do
+        assert time_session.ended?
+      end
+    end
+  end
 end

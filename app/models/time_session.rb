@@ -8,4 +8,8 @@ class TimeSession < ApplicationRecord
 
     Oj.load(operation_types).sample.capitalize.constantize.random(user)
   end
+
+  def ended?
+    Time.zone.now > created_at + minutes.minutes
+  end
 end
