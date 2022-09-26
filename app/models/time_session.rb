@@ -5,6 +5,8 @@ class TimeSession < ApplicationRecord
   has_many :answers_sessions, dependent: :destroy
   has_many :answers, through: :answers_sessions
 
+  validates_presence_of :minutes
+
   def next_problem
     return Problem.operation_types.sample.random(user) if operation_types.blank?
 

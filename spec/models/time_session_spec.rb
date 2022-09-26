@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe TimeSession, type: :model do
+  it { should validate_presence_of(:minutes) }
+
   let(:operation_types) { Problem.operation_types_s.sample(2) }
   let(:time_session) { create :time_session, operation_types: operation_types }
 

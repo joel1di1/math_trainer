@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Multiplication < Problem
-  FREQUENCIES = [
+  FREQUENCIES = [ # first is the frequency, second is the number
     [1, 1],
     [1, 2],
     [3, 3],
@@ -11,11 +11,11 @@ class Multiplication < Problem
     [6, 7],
     [6, 8],
     [4, 9],
-    [2, 10]
+    [0, 10]
   ].freeze
 
   def self.random(_user)
-    number_1 ||= random_with_frequency(FREQUENCIES)
+    number_1 ||= [2,3,4,5,10]
     number_2 ||= random_with_frequency(FREQUENCIES)
 
     number_1, number_2 = number_2, number_1 if [true, false].sample
