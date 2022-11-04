@@ -1,0 +1,19 @@
+h1 Listing additions
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @additions.each do |addition|
+      tr
+        td = link_to 'Show', addition
+        td = link_to 'Edit', edit_addition_path(addition)
+        td = link_to 'Destroy', addition, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Addition', new_addition_path

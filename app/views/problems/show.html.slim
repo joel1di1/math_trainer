@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Number 1:
+  = @problem.number_1
+p
+  strong Number 2:
+  = @problem.number_2
+p
+  strong Hole position:
+  = @problem.hole_position
+
+=> link_to 'Edit', edit_problem_path(@problem)
+'|
+=< link_to 'Back', problems_path

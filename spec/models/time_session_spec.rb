@@ -6,7 +6,7 @@ RSpec.describe TimeSession, type: :model do
   it { should validate_presence_of(:minutes) }
 
   let(:operation_types) { Problem.operation_types_s.sample(2) }
-  let(:time_session) { create :time_session, operation_types: operation_types }
+  let(:time_session) { create :time_session, operation_types: }
 
   describe '#next_problem' do
     subject(:next_problem) { time_session.next_problem }

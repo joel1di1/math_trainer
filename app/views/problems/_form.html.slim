@@ -1,0 +1,18 @@
+= form_for @problem do |f|
+  - if @problem.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@problem.errors.count, "error")} prohibited this problem from being saved:"
+      ul
+        - @problem.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :number_1
+    = f.number_field :number_1
+  .field
+    = f.label :number_2
+    = f.number_field :number_2
+  .field
+    = f.label :hole_position
+    = f.number_field :hole_position
+  .actions = f.submit

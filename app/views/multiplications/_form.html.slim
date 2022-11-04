@@ -1,0 +1,9 @@
+= form_for @multiplication do |f|
+  - if @multiplication.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@multiplication.errors.count, "error")} prohibited this multiplication from being saved:"
+      ul
+        - @multiplication.errors.full_messages.each do |message|
+          li = message
+
+  .actions = f.submit

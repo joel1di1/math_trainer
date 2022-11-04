@@ -1,0 +1,42 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - 'node_modules/**/*'
+  NewCops: enable
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - 'db/migrate/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/*'
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/BlockLength:
+  Max: 30
+  Exclude:
+    - 'spec/**/*'
+    - 'config/routes.rb'
+    - 'db/schema.rb'
+Naming/VariableNumber:
+  Enabled: false
+
+Layout/InitialIndentation:
+  Exclude:
+    - 'app/views/**/*.slim'
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'app/views/**/*.slim'
+
+Layout/TrailingEmptyLines:
+  Exclude:
+  - 'app/views/**/*.slim'

@@ -8,7 +8,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  config.secret_key = '41c48f20249c8faa465a9b04cfb008cdf1bb46de1cf9ba4ca91af5f0fab56a2dd888e74a7f7b85f9fc973ce735faf5901981e3c8d228f81b4bfa48c60cc21e4f' # rubocop:disable Layout/LineLength
+  config.secret_key = 'cdf1bb46de1cf9ba4ca91af5f0fab541c48f20249c8faa465a9b04cfb0086a2dd888e74a7f7b85f9fc973ce735faf5901981e3c8d228f81b4bfa48c60cc21e4f' # rubocop:disable Layout/LineLength
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -287,9 +287,9 @@ Devise.setup do |config|
   # ==> Turbolinks configuration
   # If your app is using Turbolinks, Turbolinks::Controller needs to be included to make redirection work correctly:
   #
-  ActiveSupport.on_load(:devise_failure_app) do
-    include Turbolinks::Controller
-  end
+  # ActiveSupport.on_load(:devise_failure_app) do
+  #   include Turbolinks::Controller
+  # end
 
   # ==> Configuration for :registerable
 

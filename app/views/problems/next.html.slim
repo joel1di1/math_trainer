@@ -1,0 +1,17 @@
+.grid.grid-cols-3.gap-4.result
+  div
+    | &nbsp;
+  - flash.each do |key, value|
+    div class="result-box text-center text-4xl font-extrabold" role='alert'
+      div class= "#{flash_class(key)} my-6 rounded shadow-lg px-12 py-2"
+        = value
+        span class='text-xs font-thin' = current_user.current_streak
+  div
+
+.text-center
+  div
+    = form_with(model: @answer, local: true) do |form|
+      - type_name = @answer.problem.type.downcase
+      - partial_name = "#{type_name}s/#{type_name}"
+      = hidden_field_tag :time_session_id, @time_session.id if @time_session.present?
+      = render partial: partial_name, locals: { problem: @answer.problem, form: form }

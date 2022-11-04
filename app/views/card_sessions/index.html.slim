@@ -1,0 +1,23 @@
+h1 Listing card_sessions
+
+table
+  thead
+    tr
+      th Title
+      th User
+      th
+      th
+      th
+
+  tbody
+    - @card_sessions.each do |card_session|
+      tr
+        td = card_session.title
+        td = card_session.user
+        td = link_to 'Show', card_session
+        td = link_to 'Edit', edit_card_session_path(card_session)
+        td = link_to 'Destroy', card_session, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Card session', new_card_session_path

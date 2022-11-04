@@ -1,0 +1,26 @@
+.container
+  .flex.flex-row.mb-4.p-6.content-center
+    .flex-1.text-center
+      = link_to 'New Time session', new_time_session_path, class: 'flex-1 mx-10 cursor-pointer text-xl py-2 px-4 border border-transparent rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out'
+
+h2 Sessions passées
+
+
+table.table-auto
+  thead
+    tr
+      th.px-4.py-2 Date
+      th.px-4.py-2 Minutes
+      th.px-4.py-2 Operation types
+      th.px-4.py-2
+
+  tbody
+    - @time_sessions.each do |time_session|
+      tr
+        td.px-4.py-2 = link_to time_session.created_at.to_datetime.to_s(:short), time_session
+        td.px-4.py-2.text-right = time_session.minutes
+        td.px-4.py-2 = Oj.load(time_session.operation_types).join(', ') if time_session.operation_types.present?
+        td.px-4.py-2 = link_to 'Supprimer', time_session, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
