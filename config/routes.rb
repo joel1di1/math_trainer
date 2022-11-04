@@ -44,4 +44,7 @@ Rails.application.routes.draw do
       get :next
     end
   end
+
+  resources :user, only: :show do
+  end
 end

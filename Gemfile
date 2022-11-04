@@ -46,3 +46,5 @@ group :test do
   gem 'timecop'
   gem 'webdrivers'
 end
+
+gem "devise-tailwinded", "~> 0.1.5"
