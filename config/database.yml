@@ -16,4 +16,6 @@ test:
   database: math_trainer_test
 
 production:
+  adapter: postgresql
+  encoding: unicode
   url: <%= ENV['DATABASE_URL'] %>
