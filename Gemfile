@@ -10,11 +10,14 @@ gem 'rails', '~> 7.0.4'
 gem 'administrate'
 gem 'bootsnap', require: false
 gem 'devise'
+gem 'devise-tailwinded', '~> 0.1.5'
 gem 'importmap-rails'
 gem 'jbuilder'
 gem 'oj'
 gem 'pg'
+gem 'postmark-rails'
 gem 'puma'
+gem 'redis'
 gem 'redis'
 gem 'sassc-rails'
 gem 'slim'
@@ -49,6 +52,3 @@ group :test do
   gem 'timecop'
   gem 'webdrivers'
 end
-
-gem 'devise-tailwinded', '~> 0.1.5'
-gem 'redis'

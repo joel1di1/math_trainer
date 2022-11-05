@@ -60,16 +60,18 @@
 
 .animated {
   animation-duration: 1s;
-  &.bounceIn {
-    animation-name: bounceIn;
-  }
-
-  &.flyFromRight {
-    animation-name: flyFromRight;
-  }
-
-  &.flyFromLeft {
-    animation-name: flyFromLeft;
-  }
   position: relative;
 }
+
+.animated.bounceIn {
+  animation-name: bounceIn;
+}
+
+.animated.flyFromRight {
+  animation-name: flyFromRight;
+}
+
+.animated.flyFromLeft {
+  animation-name: flyFromLeft;
+}
+
