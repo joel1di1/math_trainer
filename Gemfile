@@ -12,8 +12,10 @@ gem 'bootsnap', require: false
 gem 'devise'
 gem 'importmap-rails'
 gem 'jbuilder'
+gem 'oj'
 gem 'pg'
 gem 'puma'
+gem 'redis'
 gem 'sassc-rails'
 gem 'slim'
 gem 'sprockets-rails'
@@ -34,6 +36,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'hotwire-livereload'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'web-console'
@@ -47,4 +50,5 @@ group :test do
   gem 'webdrivers'
 end
 
-gem "devise-tailwinded", "~> 0.1.5"
+gem 'devise-tailwinded', '~> 0.1.5'
+gem "redis"

@@ -17,7 +17,7 @@ table.table-auto
   tbody
     - @time_sessions.each do |time_session|
       tr
-        td.px-4.py-2 = link_to time_session.created_at.to_datetime.to_s(:short), time_session
+        td.px-4.py-2 = link_to time_session.created_at.to_datetime.strftime('%c'), time_session
         td.px-4.py-2.text-right = time_session.minutes
         td.px-4.py-2 = Oj.load(time_session.operation_types).join(', ') if time_session.operation_types.present?
         td.px-4.py-2 = link_to 'Supprimer', time_session, data: { confirm: 'Are you sure?' }, method: :delete

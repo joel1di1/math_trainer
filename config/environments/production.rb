@@ -92,4 +92,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.delivery_method   = :postmark
+  config.action_mailer.postmark_settings = { api_key: ENV.fetch('POSTMARK_API_KEY', nil) }
+
 end

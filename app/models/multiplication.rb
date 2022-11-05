@@ -15,7 +15,7 @@ class Multiplication < Problem
   ].freeze
 
   def self.random(_user)
-    number_1 ||= [2, 3, 4, 5, 10]
+    number_1 ||= random_with_frequency(FREQUENCIES)
     number_2 ||= random_with_frequency(FREQUENCIES)
 
     number_1, number_2 = number_2, number_1 if [true, false].sample

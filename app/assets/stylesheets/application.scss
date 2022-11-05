@@ -13,3 +13,63 @@
  *= require_tree .
  *= require_self
  */
+
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+@keyframes flyFromRight {
+  0% {
+    left: 1200px;
+    opacity: 0;
+  }
+  60% {
+    left: -100px;
+    opacity: 1;
+  }
+  100% {
+    left: 0px;
+  }
+}
+
+@keyframes flyFromLeft {
+  0% {
+    right: 1200px;
+    opacity: 0;
+  }
+  60% {
+    right: -100px;
+    opacity: 1;
+  }
+  100% {
+    right: 0px;
+  }
+}
+
+.animated {
+  animation-duration: 1s;
+  &.bounceIn {
+    animation-name: bounceIn;
+  }
+
+  &.flyFromRight {
+    animation-name: flyFromRight;
+  }
+
+  &.flyFromLeft {
+    animation-name: flyFromLeft;
+  }
+  position: relative;
+}

@@ -6,13 +6,13 @@
         - @time_session.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :minutes
-    = f.number_field :minutes
-  .field
-    = f.label :operation_types
-    = f.select :operation_types, Problem.operation_types_s, {}, { multiple: true }
-  / .field
-  /   = f.label :frequencies
-  /   = f.text_field :frequencies
-  .actions = f.submit
+  .mb-7
+    = f.label :minutes, 'Temps (mins)', class: 'block text-md font-medium text-gray-800 mb-2'
+    = f.number_field :minutes, value: 5, class: 'rounded w-48 mb-5', required: true
+    = f.label :operation_types, 'Opérations à travailler', class: 'block text-md font-medium text-gray-800 mb-2'
+    = f.select :operation_types, Problem.operation_types_s, {}, {class: 'rounded w-48', multiple: true, data: { controller: 'ts--select' }, size: 1, required: true }
+    / .field
+    /   = f.label :frequencies
+    /   = f.text_field :frequencies
+
+  = f.submit 'Créer une session', class: 'btn-primary'
