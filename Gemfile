@@ -49,3 +49,5 @@ group :test do
   gem 'timecop'
   gem 'webdrivers'
 end
+
+gem "dockerfile-rails", ">= 1.2", :group => :development
