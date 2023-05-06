@@ -116,6 +116,7 @@ GEM
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
+    foreman (0.87.2)
     globalid (1.1.0)
       activesupport (>= 5.0)
     hotwire-livereload (1.2.3)
@@ -370,6 +371,7 @@ DEPENDENCIES
   dockerfile-rails (>= 1.2)
   factory_bot_rails
   faker
+  foreman
   hotwire-livereload
   importmap-rails
   jbuilder
