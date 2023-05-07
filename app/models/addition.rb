@@ -13,16 +13,6 @@ class Addition < Problem
     [6, 8],
     [6, 9],
     [2, 10]
-    # [3, 11],
-    # [3, 12],
-    # [3, 13],
-    # [3, 14],
-    # [3, 15],
-    # [3, 16],
-    # [3, 17],
-    # [3, 18],
-    # [3, 19],
-    # [3, 20]
   ].freeze
 
   def self.random(_user, number_1 = nil, number_2 = nil)
