@@ -16,10 +16,22 @@ table.table-auto
 
   tbody
     - @time_sessions.each do |time_session|
-      tr
+      tr.odd:bg-gray-100.even:bg-white
         td.px-4.py-2 = link_to time_session.created_at.to_datetime.strftime('%c'), time_session
         td.px-4.py-2.text-right = time_session.minutes
-        td.px-4.py-2 = time_session.operation_types
+        td.px-4.py-2
+          .flex.flex-col
+            - time_session.operation_types.each do |operation_type_name, params|
+              .px-2.py-1.mr-2.mt-2.flex.flex-row.justify-between
+                .name
+                  = operation_type_name
+                  = " (#{params['table_numbers'].join(', ')}) "
+                .flex.flex-row
+                  - max = params['frequencies'].values.max
+                  - params['frequencies'].each do |number, frequency|
+
+                    .freq.bg-green-200.py-1.mr-1.text-xs.text-gray-400.w-2 style="height: #{(frequency * 100 / max) * 30 / 100}px"
+                      / = number
         td.px-4.py-2 = link_to 'Supprimer', time_session, data: { confirm: 'Are you sure?' }, method: :delete
 
 br
