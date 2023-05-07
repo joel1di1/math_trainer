@@ -28,27 +28,4 @@
               = f.label "#{operation_type}_frequencies_#{first_number}", first_number
               = number_field_tag "#{operation_type}_frequencies_#{first_number}", 1, min: 1, max: 10, class: 'h-5 w-16'
 
-
-    /     -- ADDTIONS ----                -- MULTIPLICATIONS ----
-    /
-    /     --only--   --frequencies--      --only--   --frequencies--
-    /      1 [x]       1  : 1              1 [x]       1  : 1
-    /      2 [x]       2  : 2              2 [x]       2  : 2
-    /      3 [x]       3  : 5              3 [x]       3  : 5
-    /      4 [x]       4  : 5              4 [x]       4  : 5
-    /      5 [x]       5  : 5              5 [x]       5  : 5
-    /      6 [ ]       6  : 8              6 [ ]       6  : 8
-    /      7 [ ]       7  : 8              7 [ ]       7  : 8
-    /      8 [ ]       8  : 8              8 [ ]       8  : 8
-    /      9 [x]       9  : 8              9 [x]       9  : 8
-    /     10 [x]       10 : 1             10 [x]       10 : 1
-
-
-
-    / apprendre un outil de texte => schema
-    / faire un outil de texte <=> schema en ligne et offline
-
-
-
-
   = f.submit 'Créer une session', class: 'btn-primary'
