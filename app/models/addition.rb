@@ -25,9 +25,9 @@ class Addition < Problem
     # [3, 20]
   ].freeze
 
-  def self.random(_user)
-    number_1 = random_with_frequency(FREQUENCIES)
-    number_2 = random_with_frequency(FREQUENCIES)
+  def self.random(_user, number_1 = nil, number_2 = nil)
+    number_1 ||= random_with_frequency(FREQUENCIES)
+    number_2 ||= random_with_frequency(FREQUENCIES)
 
     number_1, number_2 = number_2, number_1 if Random.random_number * 2 > 1
 

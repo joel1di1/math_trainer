@@ -5,7 +5,8 @@ require 'rails_helper'
 RSpec.describe TimeSession, type: :model do
   it { should validate_presence_of(:minutes) }
 
-  let(:operation_types) { Problem.operation_types_s.sample(2) }
+  let(:operation_type) { Problem.operation_types_s.sample }
+  let(:operation_types) { { operation_type => TimeSession.random_operation_type_values } }
   let(:time_session) { create :time_session, operation_types: }
 
   describe '#next_problem' do
@@ -15,22 +16,21 @@ RSpec.describe TimeSession, type: :model do
     end
 
     context 'only additions' do
-      let(:operation_types) { [Addition.to_s] }
-      it {
-        expect(next_problem).to be_instance_of(Addition)
-      }
+      let(:operation_type) { Addition.to_s }
+      it { expect(next_problem).to be_instance_of(Addition) }
     end
 
     context 'only multiplications' do
-      let(:operation_types) { [Multiplication.to_s] }
-      it {
-        expect(next_problem).to be_instance_of(Multiplication)
-      }
-    end
+      let(:operation_type) { Multiplication.to_s }
+      it { expect(next_problem).to be_instance_of(Multiplication) }
 
-    context 'with operation types as nil' do
-      let(:operation_types) { nil }
-      it { expect(next_problem).to be_kind_of(Problem) }
+      context 'table of 2, only 7' do
+        let(:operation_type) { Multiplication.to_s }
+        let(:operation_types) { { operation_type => { table_numbers: [2], frequencies: { 7 => 1 } } } }
+
+        it { expect(next_problem).to be_instance_of(Multiplication) }
+        it { expect([next_problem.number_1, next_problem.number_2]).to match_array([2, 7]) }
+      end
     end
   end
 

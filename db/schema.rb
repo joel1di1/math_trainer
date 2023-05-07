@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,97 +10,97 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_123_194_342) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_06_094746) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'answers', force: :cascade do |t|
-    t.bigint 'user_id', null: false
-    t.bigint 'problem_id', null: false
-    t.string 'text'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.boolean 'correct'
-    t.bigint 'card_session_id'
-    t.index ['card_session_id'], name: 'index_answers_on_card_session_id'
-    t.index ['problem_id'], name: 'index_answers_on_problem_id'
-    t.index ['user_id'], name: 'index_answers_on_user_id'
+  create_table "answers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "problem_id", null: false
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "correct"
+    t.bigint "card_session_id"
+    t.index ["card_session_id"], name: "index_answers_on_card_session_id"
+    t.index ["problem_id"], name: "index_answers_on_problem_id"
+    t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
-  create_table 'answers_sessions', force: :cascade do |t|
-    t.bigint 'answer_id', null: false
-    t.bigint 'time_session_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['answer_id'], name: 'index_answers_sessions_on_answer_id'
-    t.index ['time_session_id'], name: 'index_answers_sessions_on_time_session_id'
+  create_table "answers_sessions", force: :cascade do |t|
+    t.bigint "answer_id", null: false
+    t.bigint "time_session_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_answers_sessions_on_answer_id"
+    t.index ["time_session_id"], name: "index_answers_sessions_on_time_session_id"
   end
 
-  create_table 'card_session_problems', force: :cascade do |t|
-    t.bigint 'problem_id', null: false
-    t.bigint 'card_session_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['card_session_id'], name: 'index_card_session_problems_on_card_session_id'
-    t.index ['problem_id'], name: 'index_card_session_problems_on_problem_id'
+  create_table "card_session_problems", force: :cascade do |t|
+    t.bigint "problem_id", null: false
+    t.bigint "card_session_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_session_id"], name: "index_card_session_problems_on_card_session_id"
+    t.index ["problem_id"], name: "index_card_session_problems_on_problem_id"
   end
 
-  create_table 'card_sessions', force: :cascade do |t|
-    t.string 'title'
-    t.bigint 'user_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['user_id'], name: 'index_card_sessions_on_user_id'
+  create_table "card_sessions", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_card_sessions_on_user_id"
   end
 
-  create_table 'problems', force: :cascade do |t|
-    t.string 'type'
-    t.integer 'number_1'
-    t.integer 'number_2'
-    t.integer 'hole_position'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "problems", force: :cascade do |t|
+    t.string "type"
+    t.integer "number_1"
+    t.integer "number_2"
+    t.integer "hole_position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'time_sessions', force: :cascade do |t|
-    t.bigint 'user_id', null: false
-    t.integer 'minutes'
-    t.string 'operation_types'
-    t.string 'frequencies'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['user_id'], name: 'index_time_sessions_on_user_id'
+  create_table "time_sessions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "minutes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "frequencies"
+    t.jsonb "operation_types", default: {}
+    t.index ["user_id"], name: "index_time_sessions_on_user_id"
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'DeviseCreateUsers'
-    t.string 'email', default: '', null: false
-    t.string 'encrypted_password', default: '', null: false
-    t.string 'reset_password_token'
-    t.datetime 'reset_password_sent_at', precision: nil
-    t.datetime 'remember_created_at', precision: nil
-    t.integer 'sign_in_count', default: 0, null: false
-    t.datetime 'current_sign_in_at', precision: nil
-    t.datetime 'last_sign_in_at', precision: nil
-    t.inet 'current_sign_in_ip'
-    t.inet 'last_sign_in_ip'
-    t.string 'confirmation_token'
-    t.datetime 'confirmed_at', precision: nil
-    t.datetime 'confirmation_sent_at', precision: nil
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['confirmation_token'], name: 'index_users_on_confirmation_token', unique: true
-    t.index ['email'], name: 'index_users_on_email', unique: true
-    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
+  create_table "users", force: :cascade do |t|
+    t.string "DeviseCreateUsers"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key 'answers', 'card_sessions'
-  add_foreign_key 'answers', 'problems'
-  add_foreign_key 'answers', 'users'
-  add_foreign_key 'answers_sessions', 'answers'
-  add_foreign_key 'answers_sessions', 'time_sessions'
-  add_foreign_key 'card_session_problems', 'card_sessions'
-  add_foreign_key 'card_session_problems', 'problems'
-  add_foreign_key 'card_sessions', 'users'
-  add_foreign_key 'time_sessions', 'users'
+  add_foreign_key "answers", "card_sessions"
+  add_foreign_key "answers", "problems"
+  add_foreign_key "answers", "users"
+  add_foreign_key "answers_sessions", "answers"
+  add_foreign_key "answers_sessions", "time_sessions"
+  add_foreign_key "card_session_problems", "card_sessions"
+  add_foreign_key "card_session_problems", "problems"
+  add_foreign_key "card_sessions", "users"
+  add_foreign_key "time_sessions", "users"
 end

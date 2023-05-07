@@ -14,7 +14,7 @@ class Multiplication < Problem
     [0, 10]
   ].freeze
 
-  def self.random(_user)
+  def self.random(_user, number_1 = nil, number_2 = nil)
     number_1 ||= random_with_frequency(FREQUENCIES)
     number_2 ||= random_with_frequency(FREQUENCIES)
 

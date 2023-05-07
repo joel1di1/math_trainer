@@ -23,7 +23,27 @@ class TimeSessionsController < ApplicationController
   def create
     @time_session = TimeSession.new(time_session_params)
     @time_session.user = current_user
-    @time_session.operation_types = params[:time_session][:operation_types].select(&:present?)
+    operation_types = params[:time_session][:operation_types].select(&:present?)
+
+    @time_session.operation_types = operation_types.map do |operation_type|
+      operation_types_settings = { table_numbers: [], frequencies: {} }
+
+      (1..10).each do |first_number|
+        first_number_checked = "#{operation_type}_onlys_#{first_number}".downcase
+        if params[first_number_checked].present?
+          operation_types_settings[:table_numbers] << first_number
+        end
+      end
+
+      (1..10).each do |second_number|
+        second_number_frequency = params["#{operation_type}_frequencies_#{second_number}".downcase]
+        if second_number_frequency.present?
+          operation_types_settings[:frequencies][second_number] = second_number_frequency.to_i
+        end
+      end
+
+      [operation_type, operation_types_settings]
+    end.to_h
 
     respond_to do |format|
       if @time_session.save

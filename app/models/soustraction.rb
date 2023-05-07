@@ -25,7 +25,7 @@ class Soustraction < Problem
     [3, 20]
   ].freeze
 
-  def self.random(_user)
+  def self.random(_user, number_1 = nil, number_2 = nil)
     number_1 ||= random_with_frequency(FREQUENCY_ARRAY)
     number_2 ||= random_with_frequency(FREQUENCY_ARRAY)
 

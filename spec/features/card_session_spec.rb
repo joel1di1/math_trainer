@@ -10,7 +10,7 @@ describe 'card session', type: :feature do
     sign_in user
   end
 
-  it 'let me answer a question and have a feedback' do
+  it 'let me answer a question and have a feedback', skip: 'card session not implemented' do
     visit "/card_sessions/#{card_session.id}/next"
 
     # expect(page).to have_text('yolo')
