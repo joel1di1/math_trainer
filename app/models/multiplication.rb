@@ -11,7 +11,7 @@ class Multiplication < Problem
     [6, 7],
     [6, 8],
     [4, 9],
-    [0, 10]
+    [1, 10]
   ].freeze
 
   def self.random(_user, number_1 = nil, number_2 = nil)
