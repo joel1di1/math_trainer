@@ -23,31 +23,23 @@ class TimeSessionsController < ApplicationController
   def create
     @time_session = TimeSession.new(time_session_params)
     @time_session.user = current_user
-    operation_types = params[:time_session][:operation_types].select(&:present?)
 
-    @time_session.operation_types = operation_types.map do |operation_type|
-      operation_types_settings = { table_numbers: [], frequencies: {} }
-
-      (1..10).each do |first_number|
-        first_number_checked = "#{operation_type}_onlys_#{first_number}".downcase
-        if params[first_number_checked].present?
-          operation_types_settings[:table_numbers] << first_number
+    %w[addition subtraction multiplication division].each do |operation|
+      operation_params = params[:time_session][operation]
+      if operation_params.present?
+        table_numbers = []
+        frequencies = {}
+        (1..10).each do |num|
+          table_numbers << num if operation_params["table_#{num}"].present?
+          frequencies[num] = operation_params["frequency_#{num}"].to_i if operation_params["frequency_#{num}"].present?
         end
+        @time_session.operation_types[operation] = { table_numbers: table_numbers, frequencies: frequencies }
       end
-
-      (1..10).each do |second_number|
-        second_number_frequency = params["#{operation_type}_frequencies_#{second_number}".downcase]
-        if second_number_frequency.present?
-          operation_types_settings[:frequencies][second_number] = second_number_frequency.to_i
-        end
-      end
-
-      [operation_type, operation_types_settings]
-    end.to_h
+    end
 
     respond_to do |format|
       if @time_session.save
-        format.html { redirect_to @time_session, notice: 'Time session was successfully created.' }
+        format.html { redirect_to next_time_session_path(@time_session), notice: 'Commencez !' }
         format.json { render :show, status: :created, location: @time_session }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -103,6 +95,6 @@ class TimeSessionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def time_session_params
-    params.require(:time_session).permit(:minutes, :operation_types, :frequencies)
+    params.require(:time_session).permit(:minutes)
   end
 end

@@ -7,25 +7,27 @@
           li = message
 
   .mb-7
-    = f.label :minutes, 'Temps (mins)', class: 'block text-md font-medium text-gray-800 mb-2'
+    = f.label :minutes, 'Temps (minutes)', class: 'block text-md font-medium text-gray-800 mb-2'
     = f.number_field :minutes, value: 5, class: 'rounded w-48 mb-5', required: true
-    = f.label :operation_types, 'Opérations à travailler', class: 'block text-md font-medium text-gray-800 mb-2'
-    = f.select :operation_types, Problem.operation_types_s, {}, {class: 'rounded w-48', multiple: true, data: { controller: 'ts--select' }, size: 1, required: true }
-
 
     .flex.flex-wrap.gap-8
       - [:addition, :soustraction, :multiplication, :division].each do |operation_type|
-        .flex.flex-col
-          h2.w-full.text-center = operation_type
-
-          .grid.grid-cols-4.gap-1
-            h3.col-span-2 Tables
-            h3.col-span-2 Fréquences
-            - (1..10).each do |first_number|
-              = f.label "#{operation_type}_onlys_#{first_number}", first_number, class: 'w-2'
-              = check_box_tag "#{operation_type}_onlys_#{first_number}"
-
-              = f.label "#{operation_type}_frequencies_#{first_number}", first_number
-              = number_field_tag "#{operation_type}_frequencies_#{first_number}", 1, min: 1, max: 10, class: 'h-5 w-16'
+        .flex.flex-col data-controller='operation-type'
+          div class="w-48 pr-3 rounded-md bg-indigo-50 shadow-sm hover:bg-indigo-100 flex flex-row items-center"
+            label for="time_session[#{operation_type}][active]" class="px-3 py-2 flex-grow h-full block text-lg font-medium text-gray-700" = operation_type.to_s.capitalize
+            input type="checkbox" id="time_session[#{operation_type}][active]" class="rounded-md px-2 py-2 text-sm font-semibold shadow-sm" data-action="click->operation-type#toggle"
+          .h-80
+            .flex.flex-col.gap-1 data-operation-type-target='menu'
+              .flex.flex-row
+                .basis-1/2 Tables
+                .basis-1/2 Fréquences
+              - (1..10).each do |first_number|
+                .flex.flex-row
+                  .basis-1/2.flex
+                    = f.label "time_session[#{operation_type}][table_#{first_number}]", first_number, class: 'w-6'
+                    = check_box_tag "time_session[#{operation_type}][table_#{first_number}]", 1, true
+                  .basis-1/2.flex
+                    = f.label "time_session[#{operation_type}][frequency_#{first_number}]", first_number, class: 'w-6'
+                    = number_field_tag "time_session[#{operation_type}][frequency_#{first_number}]", 1, min: 0, max: 50, class: 'h-5 w-16'
 
   = f.submit 'Créer une session', class: 'btn-primary'

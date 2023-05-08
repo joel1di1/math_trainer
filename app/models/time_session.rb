@@ -11,7 +11,7 @@ class TimeSession < ApplicationRecord
     return Problem.operation_types.sample.random(user) if operation_types.blank?
 
     operation_name, params = operation_types.entries.sample
-    operation = operation_name.constantize
+    operation = operation_name.capitalize.constantize
 
     number_1 = params['table_numbers'].sample.to_i
     number_2 = flatten_frequencies(params['frequencies']).sample.to_i
