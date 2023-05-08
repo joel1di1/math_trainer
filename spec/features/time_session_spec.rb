@@ -19,7 +19,7 @@ describe 'time session', type: :feature do
 
     click_on 'New Time session'
 
-    fill_in('Temps (minutes)', with: 5)
+    fill_in('Temps (minutes)', with: 1)
 
     check 'Addition'
 

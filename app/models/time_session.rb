@@ -45,6 +45,6 @@ class TimeSession < ApplicationRecord
 
   def self.random_operation_type_values
     { table_numbers: (1..10).to_a.sample(2),
-      frequencies: (0..10).to_a.to_h { |i| [i, (1..10).to_a.sample] } }
+      frequencies: (1..10).to_a.to_h { |i| [i, (1..10).to_a.sample] } }
   end
 end
