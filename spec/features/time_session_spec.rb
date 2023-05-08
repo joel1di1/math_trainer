@@ -13,20 +13,17 @@ describe 'time session', type: :feature do
     visit '/'
 
     expect(page).to have_text('Time Sessions')
-    click_on 'Time Sessions'
+    within(find('#menu-links')) { click_on 'Time Sessions' }
 
     expect(current_path).to eq('/time_sessions')
 
     click_on 'New Time session'
 
-    fill_in('Minutes', with: 5)
-    select 'Addition', from: 'Operation types'
-    select 'Multiplication', from: 'Operation types'
+    fill_in('Temps (minutes)', with: 5)
 
-    expect { click_on 'Create Time session' }.to change(TimeSession, :count).by(1)
-    expect(current_path).to eq(time_session_path(TimeSession.last))
+    check 'Addition'
 
-    expect { click_on 'Commencer!' }.to change(TimeSession.last.answers.reload, :count).by(1)
+    expect { click_on 'Commencer !' }.to change(TimeSession, :count).by(1)
 
     time_session = TimeSession.last
     expect(current_path).to eq("/time_sessions/#{time_session.id}/next")

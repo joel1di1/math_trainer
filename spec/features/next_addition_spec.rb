@@ -18,7 +18,7 @@ describe 'next addition', type: :feature do
     allow_any_instance_of(AnswersController).to receive(:random_missed_message).and_return(missed_message)
 
     visit '/'
-    click_on 'Additions'
+    within(find('#menu-links')) { click_on 'Additions' }
 
     expect(current_path).to eq('/additions/next')
     expect(page).to have_text('3 + 6 =')

@@ -12,7 +12,7 @@
 
     .flex.flex-wrap.gap-8
       - [:addition, :soustraction, :multiplication, :division].each do |operation_type|
-        .flex.flex-col data-controller='operation-type'
+        .flex.flex-col data-controller='operation-type' id="operation_type_#{operation_type}"
           div class="w-48 pr-3 rounded-md bg-indigo-50 shadow-sm hover:bg-indigo-100 flex flex-row items-center"
             label for="time_session[#{operation_type}][active]" class="px-3 py-2 flex-grow h-full block text-lg font-medium text-gray-700" = operation_type.to_s.capitalize
             input type="checkbox" id="time_session[#{operation_type}][active]" class="rounded-md px-2 py-2 text-sm font-semibold shadow-sm" data-action="click->operation-type#toggle"
@@ -30,4 +30,4 @@
                     = f.label "time_session[#{operation_type}][frequency_#{first_number}]", first_number, class: 'w-6'
                     = number_field_tag "time_session[#{operation_type}][frequency_#{first_number}]", 1, min: 0, max: 50, class: 'h-5 w-16'
 
-  = f.submit 'Créer une session', class: 'btn-primary'
+  = f.submit 'Commencer !', class: 'btn-primary'

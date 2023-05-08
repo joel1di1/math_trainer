@@ -20,8 +20,6 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  # resources :additions
-  # resources :multiplications
   resources :answers, only: :update
 
   resources :multiplications, only: [] do

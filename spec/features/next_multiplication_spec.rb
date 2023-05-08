@@ -18,7 +18,7 @@ describe 'next multiplication', type: :feature do
     allow_any_instance_of(AnswersController).to receive(:random_missed_message).and_return(missed_message)
 
     visit '/'
-    click_on 'Multiplications'
+    within(find('#menu-links')) { click_on 'Multiplications' }
 
     expect(current_path).to eq('/multiplications/next')
     expect(page).to have_text('3 x 6 =')
