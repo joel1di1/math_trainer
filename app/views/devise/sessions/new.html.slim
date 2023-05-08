@@ -1,6 +1,20 @@
-.h-full.w-full.max-w-xs.mx-auto.align-middle
+
+
+.h-full.w-full.max-w-lg.mx-auto.align-middle
   = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'}) do |f|
-    h2.text-center Log in
+    'Invités
+    = render "devise/shared/error_messages", resource:
+    .mb-4
+      = f.label :uuid, class: "block text-sm font-bold mb-2 text-gray-700" do |f|
+        .flex.flex-col
+          span Identifiant Unique, généré aléatoirement
+          span conservez-le pour conserver vos historiques
+          span ou oubliez le sans scrupule
+      = f.text_field :uuid, autocomplete: "email", class: "mb-4 hadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      = f.submit "Log in", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-6 rounded focus:outline-none focus:shadow-outline"
+
+  = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'}) do |f|
+    text-center Utilisateurs enregistrés
     = render "devise/shared/error_messages", resource:
     .mb-4
       = f.label :email, "Email", class: "block text-sm font-bold mb-2 text-gray-700"

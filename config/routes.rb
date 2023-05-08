@@ -14,7 +14,10 @@ Rails.application.routes.draw do
     end
     resources :answers, only: :update
   end
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
+
   root 'home#index'
 
   # resources :additions

@@ -9,6 +9,10 @@ class User < ApplicationRecord
   has_many :answers
   has_many :time_sessions
 
+  attribute :uuid, :uuid, default: -> { SecureRandom.uuid }
+
+  validates :uuid, uniqueness: true
+
   def current_streak
     streak = 0
     answers.includes(:problem).where.not(text: nil).order(id: :DESC).each do |answer|
