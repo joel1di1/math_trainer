@@ -32,7 +32,7 @@ describe 'time session', type: :feature do
   end
 
   it 'next time session on ended session redirects to end' do
-    time_session = create :time_session, user: user, minutes: 10
+    time_session = create :time_session, user:, minutes: 10
     visit next_time_session_path(time_session)
     expect(page).to have_selector(:link_or_button, 'OK')
 
@@ -49,7 +49,7 @@ describe 'time session', type: :feature do
   end
 
   it 'redo time session creates a new time session and start it' do
-    time_session = create :time_session, user: user, minutes: 10
+    time_session = create :time_session, user:, minutes: 10
 
     visit time_sessions_path
     within("#time_session_#{time_session.id}") { click_on 'Refaire' }

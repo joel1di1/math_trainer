@@ -26,15 +26,15 @@ class TimeSessionsController < ApplicationController
 
     %w[addition subtraction multiplication division].each do |operation|
       operation_params = params[:time_session][operation]
-      if operation_params.present?
-        table_numbers = []
-        frequencies = {}
-        (1..10).each do |num|
-          table_numbers << num if operation_params["table_#{num}"].present?
-          frequencies[num] = operation_params["frequency_#{num}"].to_i if operation_params["frequency_#{num}"].present?
-        end
-        @time_session.operation_types[operation] = { table_numbers: table_numbers, frequencies: frequencies }
+      next unless operation_params.present?
+
+      table_numbers = []
+      frequencies = {}
+      (1..10).each do |num|
+        table_numbers << num if operation_params["table_#{num}"].present?
+        frequencies[num] = operation_params["frequency_#{num}"].to_i if operation_params["frequency_#{num}"].present?
       end
+      @time_session.operation_types[operation] = { table_numbers:, frequencies: }
     end
 
     respond_to do |format|

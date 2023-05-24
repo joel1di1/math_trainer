@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TimeSessionOperationTypesInJsonb < ActiveRecord::Migration[7.0]
   def up
     remove_column :time_sessions, :operation_types

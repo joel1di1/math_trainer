@@ -36,11 +36,11 @@ group :development, :test do
 end
 
 group :development do
+  gem 'foreman'
   gem 'hotwire-livereload'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'web-console'
-  gem 'foreman'
 end
 
 group :test do
@@ -51,4 +51,4 @@ group :test do
   gem 'webdrivers'
 end
 
-gem "dockerfile-rails", ">= 1.2", :group => :development
+gem 'dockerfile-rails', '>= 1.2', group: :development

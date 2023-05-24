@@ -78,7 +78,7 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = Logger::Formatter.new
 
   # Use a different logger for distributed setups.
   # require "syslog/logger"
@@ -97,5 +97,4 @@ Rails.application.configure do
   config.action_mailer.postmark_settings = { api_key: ENV.fetch('POSTMARK_API_KEY', nil) }
 
   Rails.application.routes.default_url_options[:host] = 'mathtrainerjoe.herokuapp.com'
-
 end

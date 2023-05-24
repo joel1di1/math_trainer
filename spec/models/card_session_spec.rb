@@ -32,7 +32,7 @@ RSpec.describe CardSession, type: :model do
 
   describe '#next' do
     it 'get next problem with non valid answer' do
-      card_session = create :card_session, user: user
+      card_session = create(:card_session, user:)
       problem_1 = create :addition, number_1: 2, number_2: 3
       problem_2 = create :addition, number_1: 5, number_2: 4
       card_session.problems = [problem_1, problem_2]
