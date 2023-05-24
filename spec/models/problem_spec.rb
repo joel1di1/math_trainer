@@ -2,9 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe Problem, type: :model do
-  subject(:problem) { create :problem }
-  let!(:user) { create :user }
+RSpec.describe Problem do
+  subject(:problem) { create(:problem) }
+
+  let!(:user) { create(:user) }
 
   describe '.correct?' do
     it 'is raise not implemented error' do
@@ -15,19 +16,21 @@ RSpec.describe Problem, type: :model do
   describe '.create_answer!' do
     subject { problem.create_answer!(user) }
 
-    it { should be_kind_of(Answer) }
-    its(:user) { should eq(user) }
-    its(:id) { should be_truthy }
-    its(:text) { should be_nil }
+    it { is_expected.to be_a(Answer) }
+    its(:user) { is_expected.to eq(user) }
+    its(:id) { is_expected.to be_truthy }
+    its(:text) { is_expected.to be_nil }
   end
 
   describe '.operation_types_s' do
-    subject(:operation_types) { Problem.operation_types_s }
+    subject(:operation_types) { described_class.operation_types_s }
+
     it { expect(operation_types).to include('Addition') }
   end
 
   describe '.operation_types' do
-    subject(:operation_types) { Problem.operation_types }
+    subject(:operation_types) { described_class.operation_types }
+
     it { expect(operation_types).to include(Addition) }
     it { expect(operation_types).to include(Multiplication) }
     it { expect(operation_types).to include(Division) }

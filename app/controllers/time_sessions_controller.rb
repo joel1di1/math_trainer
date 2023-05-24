@@ -28,7 +28,7 @@ class TimeSessionsController < ApplicationController
 
     %w[addition subtraction multiplication division].each do |operation|
       operation_params = params[:time_session][operation]
-      next unless operation_params.present?
+      next if operation_params.blank?
 
       table_numbers = []
       frequencies = {}

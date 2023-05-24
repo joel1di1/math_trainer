@@ -14,7 +14,7 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe '/time_sessions', type: :request do
+RSpec.describe '/time_sessions' do
   before { sign_in(create(:user)) }
 
   describe 'GET /new' do

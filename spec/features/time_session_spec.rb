@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-describe 'time session', type: :feature do
-  let(:user) { create :user }
+describe 'time session' do
+  let(:user) { create(:user) }
 
-  before :each do
+  before do
     sign_in user
   end
 
@@ -13,9 +13,9 @@ describe 'time session', type: :feature do
     visit '/'
 
     expect(page).to have_text('Time Sessions')
-    within(find('#menu-links')) { click_on 'Time Sessions' }
+    within(find_by_id('menu-links')) { click_on 'Time Sessions' }
 
-    expect(current_path).to eq('/time_sessions')
+    expect(page).to have_current_path('/time_sessions')
 
     click_on 'New Time session'
 
@@ -27,12 +27,12 @@ describe 'time session', type: :feature do
     expect { click_on 'Commencer !' }.to change(TimeSession, :count).by(1)
 
     time_session = TimeSession.last
-    expect(current_path).to eq("/time_sessions/#{time_session.id}/next")
+    expect(page).to have_current_path("/time_sessions/#{time_session.id}/next")
     expect(time_session.shuffle_hole_position).to be_truthy
   end
 
   it 'next time session on ended session redirects to end' do
-    time_session = create :time_session, user:, minutes: 10
+    time_session = create(:time_session, user:, minutes: 10)
     visit next_time_session_path(time_session)
     expect(page).to have_selector(:link_or_button, 'OK')
 
@@ -49,12 +49,12 @@ describe 'time session', type: :feature do
   end
 
   it 'redo time session creates a new time session and start it' do
-    time_session = create :time_session, user:, minutes: 10
+    time_session = create(:time_session, user:, minutes: 10)
 
     visit time_sessions_path
     within("#time_session_#{time_session.id}") { click_on 'Refaire' }
 
-    expect(current_path).to eq("/time_sessions/#{TimeSession.last.id}/next")
+    expect(page).to have_current_path("/time_sessions/#{TimeSession.last.id}/next")
     expect(TimeSession.last).not_to eq(time_session)
   end
 end

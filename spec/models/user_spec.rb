@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
-  let(:user) { create :user }
+RSpec.describe User do
+  let(:user) { create(:user) }
 
   it { expect(user.email).to be_truthy }
 end

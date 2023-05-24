@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-describe 'next addition', type: :feature do
-  let(:user) { create :user }
+describe 'next addition' do
+  let(:user) { create(:user) }
   let(:congrat_message) { 'congrats !' }
   let(:missed_message) { 'missed !' }
 
-  before :each do
+  before do
     sign_in user
   end
 
@@ -18,9 +18,9 @@ describe 'next addition', type: :feature do
     allow_any_instance_of(AnswersController).to receive(:random_missed_message).and_return(missed_message)
 
     visit '/'
-    within(find('#menu-links')) { click_on 'Additions' }
+    within(find_by_id('menu-links')) { click_on 'Additions' }
 
-    expect(current_path).to eq('/additions/next')
+    expect(page).to have_current_path('/additions/next')
     expect(page).to have_text('3 + 6 =')
 
     fill_in 'answer_text', with: '33'

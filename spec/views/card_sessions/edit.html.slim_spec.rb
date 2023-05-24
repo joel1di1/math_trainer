@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe 'card_sessions/edit', type: :view do
-  before(:each) do
+RSpec.describe 'card_sessions/edit' do
+  before do
     @card_session = assign(:card_session, CardSession.create!(
                                             title: 'MyString',
                                             user: nil

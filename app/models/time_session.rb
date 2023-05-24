@@ -7,7 +7,7 @@ class TimeSession < ApplicationRecord
 
   attribute :shuffle_hole_position, :boolean, default: false
 
-  validates_presence_of :minutes
+  validates :minutes, presence: true
 
   def next_problem
     return Problem.operation_types.sample.random(user) if operation_types.blank?
@@ -47,6 +47,6 @@ class TimeSession < ApplicationRecord
 
   def self.random_operation_type_values
     { table_numbers: (1..10).to_a.sample(2),
-      frequencies: (1..10).to_a.to_h { |i| [i, (1..10).to_a.sample] } }
+      frequencies: (1..10).to_a.index_with { |_i| (1..10).to_a.sample } }
   end
 end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Homes', type: :request do
+RSpec.describe 'Homes' do
   describe 'GET /index' do
     it 'returns http success' do
       sign_in(create(:user))
