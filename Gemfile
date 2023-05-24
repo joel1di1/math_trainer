@@ -32,14 +32,15 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-its'
   gem 'rspec-rails'
-  gem 'rubocop-rspec'
 end
 
 group :development do
   gem 'foreman'
   gem 'hotwire-livereload'
-  gem 'rubocop', require: false
-  gem 'rubocop-rails', require: false
+  gem 'rubocop'
+  gem 'rubocop-discourse'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
   gem 'web-console'
 end
 
