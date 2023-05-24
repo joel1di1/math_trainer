@@ -22,11 +22,13 @@ describe 'time session', type: :feature do
     fill_in('Temps (minutes)', with: 1)
 
     check 'Addition'
+    check 'Inconnue aléatoire'
 
     expect { click_on 'Commencer !' }.to change(TimeSession, :count).by(1)
 
     time_session = TimeSession.last
     expect(current_path).to eq("/time_sessions/#{time_session.id}/next")
+    expect(time_session.shuffle_hole_position).to be_truthy
   end
 
   it 'next time session on ended session redirects to end' do
