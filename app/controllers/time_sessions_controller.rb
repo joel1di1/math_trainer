@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TimeSessionsController < ApplicationController
-  before_action :set_time_session, only: %i[show edit update destroy start next end]
+  before_action :set_time_session, only: %i[show edit update destroy start next end redo]
 
   # GET /time_sessions or /time_sessions.json
   def index
@@ -68,6 +68,13 @@ class TimeSessionsController < ApplicationController
       format.html { redirect_to time_sessions_url, notice: 'Time session was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def redo
+    new_time_session = @time_session.dup
+    new_time_session.save!
+
+    redirect_to next_time_session_path(new_time_session)
   end
 
   def start

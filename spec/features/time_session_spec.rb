@@ -47,4 +47,14 @@ describe 'time session', type: :feature do
       assert_text 'La session est finie!'
     end
   end
+
+  it 'redo time session creates a new time session and start it' do
+    time_session = create :time_session, user: user, minutes: 10
+
+    visit time_sessions_path
+    within("#time_session_#{time_session.id}") { click_on 'Refaire' }
+
+    expect(current_path).to eq("/time_sessions/#{TimeSession.last.id}/next")
+    expect(TimeSession.last).not_to eq(time_session)
+  end
 end

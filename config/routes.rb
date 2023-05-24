@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post :start
       get :next
       get :end
+      post :redo
     end
   end
   resources :card_sessions do
