@@ -5,6 +5,8 @@ class TimeSession < ApplicationRecord
   has_many :answers_sessions, dependent: :destroy
   has_many :answers, through: :answers_sessions
 
+  attribute :shuffle_hole_position, :boolean, default: false
+
   validates_presence_of :minutes
 
   def next_problem
@@ -16,7 +18,7 @@ class TimeSession < ApplicationRecord
     number_1 = params['table_numbers'].sample.to_i
     number_2 = flatten_frequencies(params['frequencies']).sample.to_i
 
-    operation.random(user, number_1, number_2)
+    operation.random(user, number_1, number_2, shuffle_hole_position)
   end
 
   # frequencies is a map

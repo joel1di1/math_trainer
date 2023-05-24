@@ -95,6 +95,6 @@ class TimeSessionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def time_session_params
-    params.require(:time_session).permit(:minutes)
+    params.require(:time_session).permit(:minutes, :shuffle_hole_position)
   end
 end

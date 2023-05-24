@@ -14,14 +14,15 @@ class Division < Problem
     [2, 10]
   ].freeze
 
-  def self.random(_user, number_1 = nil, number_2 = nil)
+  def self.random(_user, number_1 = nil, number_2 = nil, shuffle_hole_position = true)
     number_1 ||= random_with_frequency(FREQUENCIES)
     number_2 ||= random_with_frequency(FREQUENCIES)
 
     product = number_1 * number_2
     number_2 = number_1 if [true, false].sample
+    hole_position = shuffle_hole_position ? [nil, 1, 2].sample : nil
 
-    Division.find_or_create_by!(number_1: product, number_2:, hole_position: [nil, 1, 2].sample)
+    Division.find_or_create_by!(number_1: product, number_2:, hole_position:)
   end
 
   def correct?(answer)

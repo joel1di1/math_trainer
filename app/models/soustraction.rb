@@ -14,13 +14,14 @@ class Soustraction < Problem
     [1, 10]
   ].freeze
 
-  def self.random(_user, number_1 = nil, number_2 = nil)
+  def self.random(_user, number_1 = nil, number_2 = nil, shuffle_hole_position = true)
     number_1 ||= random_with_frequency(FREQUENCY_ARRAY)
     number_2 ||= random_with_frequency(FREQUENCY_ARRAY)
 
     number_1, number_2 = number_2, number_1 if number_2 > number_1
+    hole_position = shuffle_hole_position ? [nil, 1, 2].sample : nil
 
-    Soustraction.find_or_create_by!(number_1:, number_2:, hole_position: [nil, 1, 2].sample)
+    Soustraction.find_or_create_by!(number_1:, number_2:, hole_position:)
   end
 
   def correct?(answer)

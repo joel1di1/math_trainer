@@ -10,6 +10,11 @@
     = f.label :minutes, 'Temps (minutes)', class: 'block text-md font-medium text-gray-800 mb-2'
     = f.number_field :minutes, value: 5, class: 'rounded w-48 mb-5', required: true
 
+    .block.mb-5
+      = f.label :shuffle_hole_position, 'shuffle_hole_position', class: 'text-md font-medium text-gray-800 mr-2'
+      = f.check_box :shuffle_hole_position, value: false, class: 'rounded'
+
+
     .flex.flex-wrap.gap-8
       - [:addition, :soustraction, :multiplication, :division].each do |operation_type|
         .flex.flex-col data-controller='operation-type' id="operation_type_#{operation_type}"
