@@ -6,8 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
-  has_many :answers
-  has_many :time_sessions
+  has_many :answers, dependent: :destroy
+  has_many :time_sessions, dependent: :destroy
 
   attribute :uuid, :uuid, default: -> { SecureRandom.uuid }
 

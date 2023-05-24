@@ -2,9 +2,9 @@
 
 class CardSession < ApplicationRecord
   belongs_to :user, optional: true
-  has_many :card_session_problems, inverse_of: :card_session
+  has_many :card_session_problems, inverse_of: :card_session, dependent: :destroy
   has_many :problems, through: :card_session_problems
-  has_many :answers, inverse_of: :card_session
+  has_many :answers, inverse_of: :card_session, dependent: :destroy
 
   def self.build_addition(range:, user:)
     card_session = CardSession.create!(user:)

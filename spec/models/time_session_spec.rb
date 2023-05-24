@@ -16,18 +16,18 @@ RSpec.describe TimeSession do
       expect(next_problem).not_to be_nil
     end
 
-    context 'only additions' do
+    context 'with only additions' do
       let(:operation_type) { Addition.to_s }
 
       it { expect(next_problem).to be_instance_of(Addition) }
     end
 
-    context 'only multiplications' do
+    context 'with only multiplications' do
       let(:operation_type) { Multiplication.to_s }
 
       it { expect(next_problem).to be_instance_of(Multiplication) }
 
-      context 'table of 2, only 7' do
+      context 'with table of 2, only 7' do
         let(:operation_type) { Multiplication.to_s }
         let(:operation_types) { { operation_type => { table_numbers: [2], frequencies: { 7 => 1 } } } }
 
@@ -38,12 +38,12 @@ RSpec.describe TimeSession do
   end
 
   describe '#ended?' do
-    it 'ends after minutes after create' do
+    it 'ends after n minutes after create' do
       Timecop.travel(time_session.created_at) do
-        assert !time_session.ended?
+        expect(time_session).not_to be_ended
       end
       Timecop.travel(time_session.created_at + (time_session.minutes + 1).minutes) do
-        assert time_session.ended?
+        expect(time_session).to be_ended
       end
     end
   end

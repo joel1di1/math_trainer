@@ -45,3 +45,24 @@ Style/FrozenStringLiteralComment:
 Layout/TrailingEmptyLines:
   Exclude:
   - 'app/views/**/*.slim'
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Rails/FilePath:
+  Exclude:
+    - 'spec/rails_helper.rb'
+
+RSpec/MultipleExpectations:
+  Max: 5
+
+RSpec/ExampleLength:
+  Max: 15
+
+RSpec/NestedGroups:
+  Max: 5
+
+Rails/ThreeStateBooleanColumn:
+  Exclude:
+    - 'db/schema.rb'
+

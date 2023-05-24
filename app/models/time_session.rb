@@ -18,7 +18,7 @@ class TimeSession < ApplicationRecord
     number_1 = params['table_numbers'].sample.to_i
     number_2 = flatten_frequencies(params['frequencies']).sample.to_i
 
-    operation.random(user, number_1, number_2, shuffle_hole_position)
+    operation.random(user, number_1, number_2, shuffle_hole_position:)
   end
 
   # frequencies is a map

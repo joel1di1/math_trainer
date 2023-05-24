@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class DivisionsController < ApplicationController
-  before_action :set_Division, only: %i[show edit update destroy]
-
   def next
     division = Division.find(params[:id]) if params[:id]
     division ||= Division.random(current_user)

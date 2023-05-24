@@ -15,7 +15,7 @@ class Addition < Problem
     [2, 10]
   ].freeze
 
-  def self.random(_user, number_1 = nil, number_2 = nil, shuffle_hole_position = true)
+  def self.random(_user, number_1 = nil, number_2 = nil, shuffle_hole_position: true)
     number_1 ||= random_with_frequency(FREQUENCIES)
     number_2 ||= random_with_frequency(FREQUENCIES)
 

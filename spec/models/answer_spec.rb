@@ -6,8 +6,8 @@ RSpec.describe Answer do
   let(:answer) { create(:answer, problem:) }
   let(:problem) { create(:addition) }
 
-  it { is_expected.to validate_presence_of(:user) }
-  it { is_expected.to validate_presence_of(:problem) }
+  it { is_expected.to belong_to(:problem) }
+  it { is_expected.to belong_to(:user) }
 
   it 'cannot be answered twice' do
     answer.text = 'test'

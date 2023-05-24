@@ -6,14 +6,14 @@ RSpec.describe Soustraction do
   let(:soustraction) { create(:soustraction) }
 
   describe '#correct?' do
-    context 'defined numbers' do
+    context 'with defined numbers' do
       let(:soustraction) { create(:soustraction, number_1: 8, number_2: 3) }
 
       it { expect(soustraction.correct?(Answer.new(text: '5'))).to be true }
       it { expect(soustraction.correct?(Answer.new(text: '6'))).to be false }
     end
 
-    context 'generated numbers' do
+    context 'with generated numbers' do
       let(:answer) { Answer.new(text: (soustraction.number_1 - soustraction.number_2).to_s) }
       let(:false_answer) { Answer.new(text: (soustraction.number_1 - soustraction.number_2 - 1).to_s) }
 
