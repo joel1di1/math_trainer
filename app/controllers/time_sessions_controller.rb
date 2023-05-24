@@ -20,6 +20,8 @@ class TimeSessionsController < ApplicationController
   def edit; end
 
   # POST /time_sessions or /time_sessions.json
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def create
     @time_session = TimeSession.new(time_session_params)
     @time_session.user = current_user
@@ -47,6 +49,8 @@ class TimeSessionsController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /time_sessions/1 or /time_sessions/1.json
   def update
