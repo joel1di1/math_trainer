@@ -3,7 +3,6 @@ name: main
 on: ['push']
 jobs:
   tests:
-    needs: rubocop
     name: Rspec
     runs-on: ubuntu-latest
     services:
