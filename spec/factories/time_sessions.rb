@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :time_session do
-    user { create(:user) }
+    user
     minutes { Faker::Number.within(range: 1..20) }
     operation_types do
       Problem.operation_types_s.sample(2).index_with do |_operation_type|
