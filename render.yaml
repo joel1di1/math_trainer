@@ -1,0 +1,18 @@
+databases:
+  - name: math_trainer_db
+    databaseName: math_trainer
+    user: math_trainer
+
+services:
+  - type: web
+    name: math_trainer
+    runtime: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: math_trainer_db
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
