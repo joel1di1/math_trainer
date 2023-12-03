@@ -1,0 +1,194 @@
+<div class="mx-auto md:w-2/3 w-full">
+  <h1 class="font-bold text-4xl">
+    Fight <%= @fight.fight_opponent.name %> !
+  </h1>
+
+  <div class="flex flex-row justify-center h-16">
+    <div>&nbsp;</div>
+    <% flash.each do |key, value| %>
+      <div class="result-box text-center text-4xl font-bold" role='alert'>
+        <div class= "#{flash_class(key)} rounded shadow-lg px-12 py-2">
+          <%= value %>
+          <span class='text-xs font-thin'> <%= current_user.current_streak %> </span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+    <div class="flex flex-col">    
+      <div class="arena z-10">
+        <div class="character" id="player1" style="background-image: url('/Sprite/Idle.png')"></div>
+        <div class="character" id="player2" style="background-image: url('/Sprite/Idle.png'); filter: hue-rotate(<%= @fight.fight_opponent.color_rot %>deg);"></div>
+        <div class="result" id="result"></div>
+      </div>
+
+      <div class='text-center z-30 mt-6' style="z-index: 30;">
+        <div>
+          <%= form_with(model: [@answer, @fight], local: true) do |form| %>
+            <% type_name = @answer.problem.type.downcase %>
+            <% partial_name = "#{type_name}s/#{type_name}" %>
+
+            <%= hidden_field_tag :fight_id, @fight.id %>
+            <%= render partial: partial_name, locals: { problem: @answer.problem, form: form } %>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  
+// GAME
+
+// check if moves is already defined
+if (typeof moves === 'undefined') {
+  var moves = {};
+}
+
+// get player divs
+if (typeof divPlayer1 === 'undefined') {
+  var divPlayer1 = document.getElementById('player1');
+}
+
+if (typeof divPlayer2 === 'undefined') {
+  var divPlayer2 = document.getElementById('player2');
+}
+
+divPlayer1 = document.getElementById('player1');
+divPlayer2 = document.getElementById('player2');
+
+// put move in an map indexed by name
+moves = {
+  'Idle': { name: 'Idle', frames: 10, iteration: 'infinite' },
+  'Attack1': { name: 'Attack1', frames: 7, iteration: 1 },
+  'Attack2': { name: 'Attack2', frames: 6, iteration: 1 },
+  'Attack3': { name: 'Attack3', frames: 9, iteration: 1 },
+  'TakeHit': { name: 'TakeHit', frames: 3, iteration: 1 },
+  'Death': { name: 'Death', frames: 11, iteration: 1 }
+};
+
+function applyMove(move, divPlayer) {
+  divPlayer.style.backgroundImage = `url(/Sprite/${move.name}.png)`;
+
+  divPlayer.style.animationName = move.name;
+  divPlayer.style.animationDuration = `${move.frames * 0.1}s`;
+  divPlayer.style.animationIterationCount = move.iteration;
+  divPlayer.style.animationTimingFunction = `steps(${move.frames})`;
+  divPlayer.style.animationDelay = '0s';
+  divPlayer.style.animationDirection = 'normal';
+}
+
+function play(moveName, divPlayer) {
+  const move = moves[moveName];
+  applyMove(move, divPlayer);
+
+  // after 1s, reset idle animation
+  setTimeout(() => {
+    applyMove(moves['Idle'], divPlayer);
+  }, move.frames * 100);
+}
+
+function death(divPlayer) {
+  applyMove(moves['Death'], divPlayer);
+
+  divPlayer.style.backgroundImage = `url(/Sprite/Death.png)`;
+  divPlayer.style.backgroundPosition = '-1134px';
+}
+
+play('Idle', divPlayer1);
+play('Idle', divPlayer2);
+
+
+function player1Attack1() {
+  play('Attack1', divPlayer1);
+  setTimeout(() => {
+    play('TakeHit', divPlayer2);
+  }, 500);
+}
+
+function player1Attack2() {
+  play('Attack2', divPlayer1);
+  setTimeout(() => {
+    play('TakeHit', divPlayer2);
+  }, 300);
+}
+
+function player1Attack3() {
+  play('Attack3', divPlayer1);
+  setTimeout(() => {
+    play('TakeHit', divPlayer2);
+  }, 700);
+}
+
+function player2Attack1() {
+  play('Attack1', divPlayer2);
+  setTimeout(() => {
+    play('TakeHit', divPlayer1);
+  }, 500);
+}
+
+function player2Attack2() {
+  play('Attack2', divPlayer2);
+  setTimeout(() => {
+    play('TakeHit', divPlayer1);
+  }, 300);
+}
+
+function player2Attack3() {
+  play('Attack3', divPlayer2);
+  setTimeout(() => {
+    play('TakeHit', divPlayer1);
+  }, 700);
+}
+
+function playScene(actions) {
+  if (actions.length === 0) {
+    return;
+  }
+
+  const [player, action] = actions[0];
+  const delay = 1200; // Delay between actions
+
+  // Determine which player function to call
+  if (player === 'player1') {
+    if (action === 'Attack1') {
+      player1Attack1();
+    } else if (action === 'Attack2') {
+      player1Attack2();
+    } else if (action === 'Attack3') {
+      player1Attack3();
+    } else if (action === 'Death') {
+      death(divPlayer1);
+    }
+  } else if (player === 'player2') {
+    if (action === 'Attack1') {
+      player2Attack1();
+    } else if (action === 'Attack2') {
+      player2Attack2();
+    } else if (action === 'Attack3') {
+      player2Attack3();
+    } else if (action === 'Death') {
+      death(divPlayer2);
+    }
+  }
+
+  // Set a timeout to call the next action after the delay
+  setTimeout(() => {
+    playScene(actions.slice(1));
+  }, delay);
+}
+
+playScene([
+  <% @actions.each do |action| %>
+    ['<%= action[0] %>', '<%= action[1]%>'],
+  <% end %>
+]);
+
+
+
+
+</script>

@@ -1,0 +1,27 @@
+<div id="<%= dom_id fight_opponent %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= fight_opponent.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Health:</strong>
+    <%= fight_opponent.health %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Speed:</strong>
+    <%= fight_opponent.speed %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Color rot:</strong>
+    <%= fight_opponent.color_rot %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this fight opponent", fight_opponent, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this fight opponent', edit_fight_opponent_path(fight_opponent), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

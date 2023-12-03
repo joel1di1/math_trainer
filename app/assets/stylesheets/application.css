@@ -75,3 +75,96 @@
   animation-name: flyFromLeft;
 }
 
+
+/* game */
+.arena {
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  background: url(/Sprite/cave.png) 0px -700px;
+}
+
+.character {
+  width: 126px;
+  height: 126px;
+  transform: scale(3) translatey(-5px);
+  background-repeat: no-repeat;
+/*  filter: drop-shadow(2px 2px 3px gray);*/
+  /* background-color: rgba(134, 0, 0, 0.1); */
+}
+
+#player2 {
+  transform: scale(-3, 3) translatey(-5px);
+  margin-left: 100px;
+/*  filter: drop-shadow(-2px 2px 3px gray);*/
+}
+
+@keyframes Idle {
+  from {
+    background-position: 0px;
+  }
+
+  to {
+    background-position: -1260px;
+  }
+}
+
+@keyframes Attack1 {
+  from {
+    background-position: 0px;
+  }
+
+  to {
+    background-position: -882px;
+  }
+}
+
+@keyframes Attack2 {
+  from {
+    background-position: 0px;
+  }
+
+  to {
+    background-position: -756px;
+  }
+}
+
+@keyframes Attack3 {
+  from {
+    background-position: 0px;
+  }
+
+  to {
+    background-position: -1134px;
+  }
+}
+
+@keyframes TakeHit {
+  from {
+    background-position: 0px;
+  }
+
+  to {
+    background-position: -378px;
+  }
+}
+
+@keyframes Death {
+  from {
+    background-position: 0px;
+  }
+
+  to {
+    background-position: -1386px;
+  }
+}
+
+.result {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+}

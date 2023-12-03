@@ -12,9 +12,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_230_524_184_320) do
+ActiveRecord::Schema[7.0].define(version: 20_231_203_230_226) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
+
+  create_table 'answer_fights', force: :cascade do |t|
+    t.bigint 'answer_id', null: false
+    t.bigint 'fight_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['answer_id'], name: 'index_answer_fights_on_answer_id'
+    t.index ['fight_id'], name: 'index_answer_fights_on_fight_id'
+  end
 
   create_table 'answers', force: :cascade do |t|
     t.bigint 'user_id', null: false
@@ -53,6 +62,29 @@ ActiveRecord::Schema[7.0].define(version: 20_230_524_184_320) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['user_id'], name: 'index_card_sessions_on_user_id'
+  end
+
+  create_table 'fight_opponents', force: :cascade do |t|
+    t.string 'name'
+    t.integer 'health'
+    t.integer 'speed'
+    t.integer 'color_rot'
+    t.jsonb 'operation_types', default: {}
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
+
+  create_table 'fights', force: :cascade do |t|
+    t.bigint 'fight_opponent_id', null: false
+    t.bigint 'user_id', null: false
+    t.integer 'remaining_player_health'
+    t.integer 'remaining_opponent_health'
+    t.integer 'round_duration'
+    t.string 'name'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['fight_opponent_id'], name: 'index_fights_on_fight_opponent_id'
+    t.index ['user_id'], name: 'index_fights_on_user_id'
   end
 
   create_table 'problems', force: :cascade do |t|
@@ -98,6 +130,8 @@ ActiveRecord::Schema[7.0].define(version: 20_230_524_184_320) do
     t.index ['uuid'], name: 'index_users_on_uuid', unique: true
   end
 
+  add_foreign_key 'answer_fights', 'answers'
+  add_foreign_key 'answer_fights', 'fights'
   add_foreign_key 'answers', 'card_sessions'
   add_foreign_key 'answers', 'problems'
   add_foreign_key 'answers', 'users'
@@ -106,5 +140,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_524_184_320) do
   add_foreign_key 'card_session_problems', 'card_sessions'
   add_foreign_key 'card_session_problems', 'problems'
   add_foreign_key 'card_sessions', 'users'
+  add_foreign_key 'fights', 'fight_opponents'
+  add_foreign_key 'fights', 'users'
   add_foreign_key 'time_sessions', 'users'
 end

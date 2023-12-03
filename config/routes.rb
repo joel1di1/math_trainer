@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :fights do
+    member do
+      get :play
+      get :end_round
+      post :answer, to: 'fights#answer'
+      patch :answer, to: 'fights#answer'
+    end
+  end
+  resources :fight_opponents
   resources :time_sessions do
     member do
       post :start

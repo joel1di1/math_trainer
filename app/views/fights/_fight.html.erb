@@ -1,0 +1,32 @@
+<div id="<%= dom_id fight %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Fight opponent:</strong>
+    <%= fight.fight_opponent_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Remaining player health:</strong>
+    <%= fight.remaining_player_health %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Remaining opponent health:</strong>
+    <%= fight.remaining_opponent_health %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Round duration:</strong>
+    <%= fight.round_duration %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= fight.name %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this fight", fight, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this fight', edit_fight_path(fight), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
