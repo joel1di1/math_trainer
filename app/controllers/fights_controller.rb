@@ -36,7 +36,7 @@ class FightsController < ApplicationController
     @fight = Fight.new(
       fight_opponent_id: fight_opponent.id,
       user_id: current_user.id,
-      remaining_player_health: 100,
+      remaining_player_health: 20,
       remaining_opponent_health: fight_opponent.health,
       round_duration: 20,
       name: params[:fight_name]
@@ -44,7 +44,7 @@ class FightsController < ApplicationController
 
     respond_to do |format|
       if @fight.save
-        format.html { redirect_to fight_url(@fight), notice: 'Fight was successfully created.' }
+        format.html { redirect_to play_fight_path(@fight), notice: 'Fight was successfully created.' }
         format.json { render :show, status: :created, location: @fight }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -80,14 +80,21 @@ class FightsController < ApplicationController
     last_answer = @fight.answers.last
     @actions = []
     if last_answer&.correct?
-      @actions << ['player1', "Attack#{(1..3).to_a.sample}"]
-      @fight.remaining_opponent_health -= 1
+      attack = (1..3).to_a.sample
+      @actions << ['player1', "Attack#{attack}"]
+      @fight.remaining_opponent_health -= attack
     end
 
-    # if last_answer was created more that opponent speed seconds ago
-    if last_answer && last_answer.created_at < Time.zone.now - @fight.fight_opponent.speed.seconds
-      @actions << ['player2', "Attack#{(1..3).to_a.sample}"]
-      @fight.remaining_player_health -= 1
+    if last_answer.present?
+
+      elapsed = (Time.zone.now - last_answer.created_at).to_i
+      roll = (1..100).to_a.sample
+      speed = @fight.fight_opponent.speed
+      if speed + elapsed > roll
+        attack = (1..3).to_a.sample
+        @actions << ['player2', "Attack#{attack}"]
+        @fight.remaining_player_health -= attack
+      end
     end
 
     @actions << %w[player1 Death] if @fight.remaining_player_health <= 0

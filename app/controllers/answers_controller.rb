@@ -3,9 +3,38 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: %i[show edit update destroy]
 
-  CONGRATS = ['Bravo', 'Génial', 'Super', 'Woohaa', 'Fantastique', 'Trop fort', 'Champion', 'Trop Bien'].freeze
-  CONGRATS_EMOJIS = %w[😀 😃 😇 🙂 😍 😉 😘 🤪 😋 😜 😺 👏 👍 🙌 👌 👌].freeze
-  MISSED = ['Zut', 'Raté', 'Dommage', 'Presque', 'Encore un effort', 'Recommence'].freeze
+  CONGRATS = ['Bravo', 'Génial', 'Super', 'Woohaa', 'Fantastique', 'Trop fort', 'Champion', 'Trop Bien', 'Excellent travail !',
+              'Incroyable !',
+              'Tu es un as !',
+              'Formidable !',
+              'Quelle performance !',
+              'Tu es incroyable !',
+              'Magnifique !',
+              'Impressionnant !',
+              'Tu es le meilleur !',
+              "Tu l'as fait comme un pro !",
+              'Quel talent !',
+              'Extraordinaire !',
+              'Tu es un champion !',
+              'Spectaculaire !',
+              'Tu déchires !',
+              'Quelle étoile !',
+              'Tu es un génie !',
+              'Sublime !',
+              'Remarquable !',
+              'Tu es un vrai pro !'].freeze
+  CONGRATS_EMOJIS = %w[😀 😃 😇 🙂 😍 😉 😘 🤪 😋 😜 😺 👏 👍 🙌 👌 🥳 🤩].freeze
+  MISSED = ['Zut', 'Raté', 'Dommage', 'Presque', 'Encore un effort', 'Recommence',
+            "C'était presque ça, essaie encore !",
+            'Tu es sur la bonne voie, continue !',
+            "Ne t'inquiète pas, l'erreur est une étape d'apprentissage.",
+            "Tu t'améliores à chaque essai.",
+            'Pas de souci, tu vas y arriver !',
+            "C'est en essayant qu'on devient plus fort.",
+            'Tu es si proche du but, ne lâche pas !',
+            'Chaque effort te rapproche de la réussite.',
+            "L'important, c'est de continuer à essayer.",
+            'Tu apprends de chaque essai, continue comme ça !'].freeze
   MISSED_EMOJIS = %w[☹️ 😡 😱 😨 😓 😰 🤔 😳].freeze
 
   # GET /answers
