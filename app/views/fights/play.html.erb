@@ -18,12 +18,12 @@
 
     <div class="flex flex-col">    
       <div class="arena z-10">
-        <div >
+        <div class="text-white">
           <%= @fight.remaining_player_health %>
         </div>
-        <div class="character" id="player1" style="background-image: url('/Sprite/Idle.png')"></div>
+        <div class="character" id="player1" style="background-image: url('/Sprite/Idle.png'); filter: hue-rotate(211deg);"></div>
         <div class="character" id="player2" style="background-image: url('/Sprite/Idle.png'); filter: hue-rotate(<%= @fight.fight_opponent.color_rot %>deg);"></div>
-        <div >
+        <div  class="text-white">
           <%= @fight.remaining_opponent_health %>
         </div>
       </div>

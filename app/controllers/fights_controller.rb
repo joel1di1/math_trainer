@@ -36,7 +36,7 @@ class FightsController < ApplicationController
     @fight = Fight.new(
       fight_opponent_id: fight_opponent.id,
       user_id: current_user.id,
-      remaining_player_health: 20,
+      remaining_player_health: 32,
       remaining_opponent_health: fight_opponent.health,
       round_duration: 20,
       name: params[:fight_name]
