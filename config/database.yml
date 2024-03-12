@@ -6,6 +6,7 @@ default: &default
   pool: <%= ENV.fetch('RAILS_MAX_THREADS', 5) %>
   username: postgres
   password: postgres
+  schema_search_path: 'math_trainer,public'
 
 development:
   <<: *default
@@ -18,4 +19,5 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
+  schema_search_path: 'math_trainer,public'
   url: <%= ENV['DATABASE_URL'] %>
