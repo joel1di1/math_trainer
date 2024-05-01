@@ -7,8 +7,8 @@ require:
 
 AllCops:
   Exclude:
-    - 'bin/*'
-    - 'node_modules/**/*'
+    - "bin/*"
+    - "node_modules/**/*"
   NewCops: enable
 
 Style/Documentation:
@@ -16,42 +16,42 @@ Style/Documentation:
 
 Metrics/AbcSize:
   Exclude:
-    - 'db/migrate/*'
+    - "db/migrate/*"
 
 Metrics/MethodLength:
   Exclude:
-    - 'db/migrate/*'
+    - "db/migrate/*"
 
 Layout/LineLength:
-  Max: 120
+  Max: 130
 
 Metrics/BlockLength:
   Max: 30
   Exclude:
-    - 'spec/**/*'
-    - 'config/routes.rb'
-    - 'db/schema.rb'
+    - "spec/**/*"
+    - "config/routes.rb"
+    - "db/schema.rb"
 Naming/VariableNumber:
   Enabled: false
 
 Layout/InitialIndentation:
   Exclude:
-    - 'app/views/**/*.slim'
+    - "app/views/**/*.slim"
 
 Style/FrozenStringLiteralComment:
   Exclude:
-    - 'app/views/**/*.slim'
+    - "app/views/**/*.slim"
 
 Layout/TrailingEmptyLines:
   Exclude:
-  - 'app/views/**/*.slim'
+    - "app/views/**/*.slim"
 
 Rails/I18nLocaleTexts:
   Enabled: false
 
 Rails/FilePath:
   Exclude:
-    - 'spec/rails_helper.rb'
+    - "spec/rails_helper.rb"
 
 RSpec/MultipleExpectations:
   Max: 5
@@ -64,5 +64,4 @@ RSpec/NestedGroups:
 
 Rails/ThreeStateBooleanColumn:
   Exclude:
-    - 'db/schema.rb'
-
+    - "db/schema.rb"

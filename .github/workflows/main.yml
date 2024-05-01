@@ -1,6 +1,6 @@
 name: main
 
-on: ['push']
+on: ["push"]
 jobs:
   tests:
     name: Rspec
@@ -31,16 +31,3 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/math_trainer_test
-
-
-  deploy:
-    needs: tests
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    name: Deploy app on fly.io
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

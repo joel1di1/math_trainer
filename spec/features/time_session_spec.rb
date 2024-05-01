@@ -13,7 +13,7 @@ describe 'time session' do
     visit '/'
 
     expect(page).to have_text('Time Sessions')
-    within(find_by_id('menu-links')) { click_on 'Time Sessions' }
+    within('#menu-links') { click_on 'Time Sessions' }
 
     expect(page).to have_current_path('/time_sessions')
 
