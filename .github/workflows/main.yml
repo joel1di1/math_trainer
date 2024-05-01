@@ -26,13 +26,26 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+
+      - name: Setup Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Set up chromedriver
+        uses: nanasess/setup-chromedriver@v2
+
+      - name: Assets Precompile
+        run: bundle exec rake assets:precompile
+
       - name: execute migrations
         run: bundle exec rake db:migrate
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/math_trainer_test
+
       - name: Run the tests
-        run: bundle exec rspec
+        run: bin/rspec
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/math_trainer_test
