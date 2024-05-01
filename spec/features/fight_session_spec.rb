@@ -13,7 +13,7 @@ describe 'fight session' do
     visit '/'
 
     expect(page).to have_text('Fight!')
-    within(find_by_id('menu-links')) { click_on 'Fight!' }
+    within('#menu-links') { click_on 'Fight!' }
 
     expect(page).to have_current_path('/fights')
 

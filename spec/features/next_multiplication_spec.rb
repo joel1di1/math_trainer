@@ -18,19 +18,19 @@ describe 'next multiplication' do
     allow_any_instance_of(AnswersController).to receive(:random_missed_message).and_return(missed_message) # rubocop:disable RSpec/AnyInstance
 
     visit '/'
-    within(find_by_id('menu-links')) { click_on 'Multiplications' }
+    within('#menu-links') { click_on 'Multiplications' }
 
     expect(page).to have_current_path('/multiplications/next')
     expect(page).to have_text('3 x 6 =')
 
     fill_in 'answer_text', with: '33'
-    click_button 'OK'
+    click_on 'OK'
 
     expect(page).to have_text(missed_message)
     expect(page).to have_text('3 x 6 =')
 
     fill_in 'answer_text', with: '18'
-    click_button 'OK'
+    click_on 'OK'
 
     expect(page).to have_text(congrat_message)
   end

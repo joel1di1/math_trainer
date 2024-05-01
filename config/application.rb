@@ -21,6 +21,10 @@ require 'action_cable/engine'
 Bundler.require(*Rails.groups)
 
 module MathTrainer
+  def self.table_name_prefix
+    'math_trainer_'
+  end
+
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
@@ -37,5 +41,7 @@ module MathTrainer
     config.generators.system_tests = nil
 
     config.assets.css_compressor = nil
+
+    config.active_record.table_name_prefix = 'math_trainer_'
   end
 end

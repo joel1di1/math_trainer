@@ -38,6 +38,7 @@ group :development do
   gem 'foreman'
   gem 'hotwire-livereload'
   gem 'rubocop'
+  gem 'rubocop-capybara'
   gem 'rubocop-discourse'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'

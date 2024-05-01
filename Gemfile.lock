@@ -365,6 +365,7 @@ DEPENDENCIES
   rspec-its
   rspec-rails
   rubocop
+  rubocop-capybara
   rubocop-discourse
   rubocop-rails
   rubocop-rspec
