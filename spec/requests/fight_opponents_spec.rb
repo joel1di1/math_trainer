@@ -15,6 +15,8 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/fight_opponents' do
+  before { sign_in(create(:user)) }
+
   # This should return the minimal set of attributes required to create a valid
   # FightOpponent. As you add validations to FightOpponent, be sure to
   # adjust the attributes here as well.

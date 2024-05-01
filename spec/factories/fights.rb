@@ -2,10 +2,11 @@
 
 FactoryBot.define do
   factory :fight do
-    fight_opponent { nil }
-    remaining_player_health { 1 }
-    remaining_opponent_health { 1 }
-    round_duration { 1 }
-    name { 'MyString' }
+    fight_opponent
+    user
+    remaining_player_health { Faker::Number.number(digits: 2) }
+    remaining_opponent_health { Faker::Number.number(digits: 2) }
+    round_duration { Faker::Number.number(digits: 2) }
+    name { Faker::Name.name }
   end
 end

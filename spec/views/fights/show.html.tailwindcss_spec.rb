@@ -4,13 +4,9 @@ require 'rails_helper'
 
 RSpec.describe 'fights/show' do
   before do
-    assign(:fight, Fight.create!(
-                     fight_opponent: nil,
-                     remaining_player_health: 2,
-                     remaining_opponent_health: 3,
-                     round_duration: 4,
-                     name: 'Name'
-                   ))
+    assign(:fight, create(:fight, remaining_player_health: 2,
+                                  remaining_opponent_health: 3,
+                                  round_duration: 4))
   end
 
   it 'renders attributes in <p>' do

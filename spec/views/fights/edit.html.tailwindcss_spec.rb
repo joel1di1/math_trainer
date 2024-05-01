@@ -3,15 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'fights/edit' do
-  let(:fight) do
-    Fight.create!(
-      fight_opponent: nil,
-      remaining_player_health: 1,
-      remaining_opponent_health: 1,
-      round_duration: 1,
-      name: 'MyString'
-    )
-  end
+  let(:fight) { create(:fight) }
 
   before do
     assign(:fight, fight)
