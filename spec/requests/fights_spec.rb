@@ -15,22 +15,15 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/fights' do
-  before { sign_in(create(:user)) }
+  let(:user) { create(:user) }
+  let(:fight_opponent) { create(:fight_opponent) }
 
-  # This should return the minimal set of attributes required to create a valid
-  # Fight. As you add validations to Fight, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
-  end
-
-  let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
-  end
+  before { sign_in(user) }
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      Fight.create! valid_attributes
+      create_list(:fight, 3)
+
       get fights_url
       expect(response).to be_successful
     end
@@ -38,7 +31,7 @@ RSpec.describe '/fights' do
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      fight = Fight.create! valid_attributes
+      fight = create(:fight)
       get fight_url(fight)
       expect(response).to be_successful
     end
@@ -48,87 +41,35 @@ RSpec.describe '/fights' do
     it 'renders a successful response' do
       get new_fight_url
       expect(response).to be_successful
+      expect(assigns(:fight_opponents)).to be_a(ActiveRecord::Relation)
     end
   end
 
-  describe 'GET /edit' do
-    it 'renders a successful response' do
-      fight = Fight.create! valid_attributes
-      get edit_fight_url(fight)
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'POST /create' do
+  describe 'POST /fights' do
     context 'with valid parameters' do
       it 'creates a new Fight' do
         expect do
-          post fights_url, params: { fight: valid_attributes }
+          post fights_path, params: { fight_opponent_id: fight_opponent.id }
         end.to change(Fight, :count).by(1)
       end
 
       it 'redirects to the created fight' do
-        post fights_url, params: { fight: valid_attributes }
-        expect(response).to redirect_to(fight_url(Fight.last))
+        post fights_path, params: { fight_opponent_id: fight_opponent.id }
+        expect(response).to redirect_to(play_fight_path(Fight.last))
       end
     end
 
     context 'with invalid parameters' do
       it 'does not create a new Fight' do
         expect do
-          post fights_url, params: { fight: invalid_attributes }
+          post fights_path, params: { fight_opponent_id: 9_999_999 }
         end.not_to change(Fight, :count)
       end
 
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post fights_url, params: { fight: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+      it 'redirect to new fight' do
+        post fights_path, params: { fight_opponent_id: 9_999_999 }
+        expect(response).to redirect_to(new_fight_url)
       end
-    end
-  end
-
-  describe 'PATCH /update' do
-    context 'with valid parameters' do
-      let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
-      end
-
-      it 'updates the requested fight' do
-        fight = Fight.create! valid_attributes
-        patch fight_url(fight), params: { fight: new_attributes }
-        fight.reload
-        skip('Add assertions for updated state')
-      end
-
-      it 'redirects to the fight' do
-        fight = Fight.create! valid_attributes
-        patch fight_url(fight), params: { fight: new_attributes }
-        fight.reload
-        expect(response).to redirect_to(fight_url(fight))
-      end
-    end
-
-    context 'with invalid parameters' do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        fight = Fight.create! valid_attributes
-        patch fight_url(fight), params: { fight: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-  end
-
-  describe 'DELETE /destroy' do
-    it 'destroys the requested fight' do
-      fight = Fight.create! valid_attributes
-      expect do
-        delete fight_url(fight)
-      end.to change(Fight, :count).by(-1)
-    end
-
-    it 'redirects to the fights list' do
-      fight = Fight.create! valid_attributes
-      delete fight_url(fight)
-      expect(response).to redirect_to(fights_url)
     end
   end
 end

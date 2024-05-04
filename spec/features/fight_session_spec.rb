@@ -5,21 +5,28 @@ require 'rails_helper'
 RSpec.describe 'fight session' do
   let(:user) { create(:user) }
   let(:fight_opponent) { create(:fight_opponent) }
+  let(:fight_opponents) { create_list(:fight_opponent, 2) + [fight_opponent] }
 
   before do
     sign_in user
     fight_opponent
   end
 
-  it 'create a new fight session' do
-    visit '/'
+  context 'with fight opponents' do
+    before do
+      fight_opponents
+    end
 
-    within('#menu-links') { click_on 'Fight!' }
-    expect(page).to have_current_path('/fights')
+    it 'create a new fight session' do
+      visit '/'
 
-    expect { click_on fight_opponent.name }.to change(Fight, :count).by(1)
+      within('#menu-links') { click_on 'Fight!' }
+      expect(page).to have_current_path('/fights/new')
 
-    fight = Fight.last
-    expect(page).to have_current_path("/fights/#{fight.id}/play")
+      expect { click_on fight_opponent.name }.to change(Fight, :count).by(1)
+
+      fight = Fight.last
+      expect(page).to have_current_path("/fights/#{fight.id}/play")
+    end
   end
 end

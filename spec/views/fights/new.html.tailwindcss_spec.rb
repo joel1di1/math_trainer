@@ -3,29 +3,19 @@
 require 'rails_helper'
 
 RSpec.describe 'fights/new' do
+  let(:fight_opponents) { create_list(:fight_opponent, 3) }
+
   before do
-    assign(:fight, Fight.new(
-                     fight_opponent: nil,
-                     remaining_player_health: 1,
-                     remaining_opponent_health: 1,
-                     round_duration: 1,
-                     name: 'MyString'
-                   ))
+    assign(:fight_opponents, fight_opponents)
   end
 
-  it 'renders new fight form' do
+  it 'renders list of fight opponents' do
     render
 
-    assert_select 'form[action=?][method=?]', fights_path, 'post' do
-      assert_select 'input[name=?]', 'fight[fight_opponent_id]'
+    assert_select 'div#fight_opponents>form', count: 3
 
-      assert_select 'input[name=?]', 'fight[remaining_player_health]'
-
-      assert_select 'input[name=?]', 'fight[remaining_opponent_health]'
-
-      assert_select 'input[name=?]', 'fight[round_duration]'
-
-      assert_select 'input[name=?]', 'fight[name]'
+    fight_opponents.each do |fight_opponent|
+      assert_select 'div#fight_opponents>form>button', text: Regexp.new(fight_opponent.name)
     end
   end
 end

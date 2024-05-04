@@ -3,7 +3,7 @@
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/MethodLength
 class FightsController < ApplicationController
-  before_action :set_fight, only: %i[show edit update destroy play]
+  before_action :set_fight, only: %i[show play]
 
   # GET /fights or /fights.json
   def index
@@ -16,21 +16,20 @@ class FightsController < ApplicationController
 
   # GET /fights/new
   def new
-    @fight = Fight.new
+    @fight_opponents = FightOpponent.all
   end
-
-  # GET /fights/1/edit
-  def edit; end
 
   # POST /fights or /fights.json
   def create
-    fight_opponent = FightOpponent.find_by(name: params[:fight_opponent_name])
+    fight_opponent = FightOpponent.find_by(id: params[:fight_opponent_id])
 
     if fight_opponent.nil?
       respond_to do |format|
-        format.html { redirect_to fight_url(@fight), notice: 'Fight opponent not found.' }
-        format.json { render json: @fight.errors, status: :unprocessable_entity }
+        format.html { redirect_to new_fight_url, notice: 'Fight opponent not found.' }
+        format.json { render json: {}, status: :unprocessable_entity }
       end
+
+      return
     end
 
     @fight = Fight.new(
@@ -50,29 +49,6 @@ class FightsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @fight.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /fights/1 or /fights/1.json
-  def update
-    respond_to do |format|
-      if @fight.update(fight_params)
-        format.html { redirect_to fight_url(@fight), notice: 'Fight was successfully updated.' }
-        format.json { render :show, status: :ok, location: @fight }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @fight.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /fights/1 or /fights/1.json
-  def destroy
-    @fight.destroy
-
-    respond_to do |format|
-      format.html { redirect_to fights_url, notice: 'Fight was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :fights do
+  resources :fights, only: %i[index new create show] do
     member do
       get :play
       get :end_round
