@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.2'
+ruby '3.3.1'
 
 gem 'rails', '~> 7.0.8'
 
@@ -47,10 +47,9 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
+  gem 'selenium'
   gem 'shoulda-matchers'
   gem 'timecop'
-  gem 'webdrivers'
 end
 
 gem 'dockerfile-rails', '>= 1.2', group: :development
