@@ -1,6 +1,6 @@
 div class="mx-auto md:w-2/3 w-full"
   h1 class="font-bold text-4xl" New fight
 
-  #fight_opponents.flex
+  #fight_opponents.flex.flex-wrap.justify-space-evenly
     - @fight_opponents.each do |fight_opponent|
-      = button_to fight_opponent.name, fights_path(fight_opponent_id: fight_opponent.id), method: :post, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer"
+      = button_to fight_opponent.name, fights_path(fight_opponent_id: fight_opponent.id), method: :post, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer hover:bg-blue-700 m-2"
