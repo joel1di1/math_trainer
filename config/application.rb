@@ -40,5 +40,8 @@ module MathTrainer
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.time_zone = 'Europe/Paris'
+    config.active_record.table_name_prefix = 'math_trainer_'
   end
 end

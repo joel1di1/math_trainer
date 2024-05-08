@@ -96,4 +96,9 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  config.action_mailer.delivery_method   = :postmark
+  config.action_mailer.postmark_settings = { api_key: ENV.fetch('POSTMARK_API_KEY', nil) }
+
+  Rails.application.routes.default_url_options[:host] = 'math-trainer.joel1di1.com'
 end
