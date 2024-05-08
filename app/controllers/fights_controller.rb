@@ -87,18 +87,16 @@ class FightsController < ApplicationController
     @fight = Fight.find(params[:fight_id])
     @answer = Answer.find(params[:id])
 
-    respond_to do |format|
-      if params[:fight][:text].blank?
-        format.html { redirect_to play_fight_path(@fight), notice: 'Blank answer detected' }
+    if params[:fight][:text].blank?
+      redirect_to play_fight_path(@fight), notice: 'Blank answer detected'
+    else
+      @answer.update!(params.require(:fight).permit(:text))
+      if @answer.correct?
+        flash[:congrats] = 'Hit!'
       else
-        @answer.update!(params.require(:fight).permit(:text))
-        if @answer.correct?
-          flash[:congrats] = 'Hit!'
-        else
-          flash[:missed] = 'Missed!'
-        end
-        format.html { redirect_to play_fight_path(@fight) }
+        flash[:missed] = 'Missed!'
       end
+      redirect_to play_fight_path(@fight)
     end
   end
 
