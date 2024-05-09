@@ -27,6 +27,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'dockerfile-rails'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec'
@@ -42,15 +43,14 @@ group :development do
   gem 'rubocop-discourse'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
+  gem 'ruby-lsp-rspec', require: false
   gem 'web-console'
 end
 
 group :test do
-  gem 'capybara', '>= 2.15'
+  gem 'capybara'
   gem 'rails-controller-testing'
   gem 'selenium'
   gem 'shoulda-matchers'
   gem 'timecop'
 end
-
-gem 'dockerfile-rails', '>= 1.2', group: :development
