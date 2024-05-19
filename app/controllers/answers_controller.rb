@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AnswersController < ApplicationController
+class AnswersController < ApplicationController # rubocop:disable Metrics/ClassLength
   before_action :set_answer, only: %i[show edit update destroy]
 
   CONGRATS = ['Bravo', 'Génial', 'Super', 'Woohaa', 'Fantastique', 'Trop fort', 'Champion', 'Trop Bien', 'Excellent travail !',
@@ -22,7 +22,13 @@ class AnswersController < ApplicationController
               'Tu es un génie !',
               'Sublime !',
               'Remarquable !',
-              'Tu es un vrai pro !'].freeze
+              'Tu es un vrai pro !',
+              'Tu es un artiste !',
+              'Tu es un virtuose !',
+              'Exceptionnel !',
+              'Admirable !',
+              'Absolument parfait !',
+              'Tu es un crack !'].freeze
   CONGRATS_EMOJIS = %w[😀 😃 😇 🙂 😍 😉 😘 🤪 😋 😜 😺 👏 👍 🙌 👌 🥳 🤩].freeze
   MISSED = ['Zut', 'Raté', 'Dommage', 'Presque', 'Encore un effort', 'Recommence',
             "C'était presque ça, essaie encore !",
@@ -34,7 +40,12 @@ class AnswersController < ApplicationController
             'Tu es si proche du but, ne lâche pas !',
             'Chaque effort te rapproche de la réussite.',
             "L'important, c'est de continuer à essayer.",
-            'Tu apprends de chaque essai, continue comme ça !'].freeze
+            'Tu apprends de chaque essai, continue comme ça !',
+            'Tu es sur la bonne voie, ne lâche rien !',
+            'Avec un peu de pratique, tu vas y arriver !',
+            'Bloqué ? Demande de l’aide à un adulte.',
+            'Chaque erreur est une occasion d’apprendre.',
+            'Plus tu t’entraînes, plus tu progresses.'].freeze
   MISSED_EMOJIS = %w[☹️ 😡 😱 😨 😓 😰 🤔 😳].freeze
 
   # GET /answers
