@@ -78,8 +78,8 @@ class FightsController < ApplicationController
 
     @fight.save!
 
-    problem = @fight.next_problem
-    @answer = problem.create_answer!(current_user)
+    @problem = @fight.next_problem
+    @answer = @problem.create_answer!(current_user)
     @fight.answers << @answer
   end
 
@@ -88,7 +88,7 @@ class FightsController < ApplicationController
     @answer = Answer.find(params[:id])
 
     if params[:fight][:text].blank?
-      redirect_to play_fight_path(@fight), notice: 'Blank answer detected'
+      flash[:notice] = 'Blank answer detected'
     else
       @answer.update!(params.require(:fight).permit(:text))
       if @answer.correct?
@@ -96,8 +96,8 @@ class FightsController < ApplicationController
       else
         flash[:missed] = 'Missed!'
       end
-      redirect_to play_fight_path(@fight)
     end
+    redirect_to play_fight_path(@fight)
   end
 
   private

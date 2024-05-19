@@ -16,7 +16,7 @@
   </div>
 
 
-    <div class="flex flex-col">    
+    <div class="flex flex-col">
       <div class="arena z-10">
         <div class="text-white">
           <%= @fight.remaining_player_health %>
@@ -31,11 +31,11 @@
       <div class='text-center z-30 mt-6' style="z-index: 30;">
         <div>
           <%= form_with(model: [@answer, @fight], local: true) do |form| %>
-            <% type_name = @answer.problem.type.downcase %>
+            <% type_name = @problem.type.downcase %>
             <% partial_name = "#{type_name}s/#{type_name}" %>
 
             <%= hidden_field_tag :fight_id, @fight.id %>
-            <%= render partial: partial_name, locals: { problem: @answer.problem, form: form } %>
+            <%= render partial: partial_name, locals: { problem: @problem, form: form } %>
 
           <% end %>
         </div>
@@ -46,7 +46,7 @@
 
 
 <script type="text/javascript">
-  
+
 // GAME
 
 // check if moves is already defined
