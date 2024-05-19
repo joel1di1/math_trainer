@@ -8,6 +8,14 @@ class Fight < ApplicationRecord
   has_many :answers, through: :answer_fights
 
   def next_problem
+    # if last answer was incorrect, return a same problem
+    last_answer = answers.last
+    return last_answer.problem if last_answer&.correct == false
+
+    random_problem
+  end
+
+  def random_problem
     return Problem.operation_types.sample.random(user) if fight_opponent.operation_types.blank?
 
     operation_name, params = fight_opponent.operation_types.entries.sample
