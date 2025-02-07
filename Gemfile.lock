@@ -184,7 +184,7 @@ GEM
     orm_adapter (0.5.0)
     ostruct (0.6.1)
     parallel (1.26.3)
-    parser (3.3.7.0)
+    parser (3.3.7.1)
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
@@ -304,7 +304,7 @@ GEM
       parser (>= 3.3.1.0)
     rubocop-capybara (2.21.0)
       rubocop (~> 1.41)
-    rubocop-discourse (3.9.2)
+    rubocop-discourse (3.9.3)
       activesupport (>= 6.1)
       rubocop (>= 1.59.0)
       rubocop-capybara (>= 2.0.0)
