@@ -70,6 +70,6 @@ class ProblemsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def problem_params
-    params.require(:problem).permit(:number_1, :number_2, :hole_position)
+    params.expect(problem: %i[number_1 number_2 hole_position])
   end
 end

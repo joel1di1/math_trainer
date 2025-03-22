@@ -90,7 +90,7 @@ class FightsController < ApplicationController
     if params[:fight][:text].blank?
       flash[:notice] = 'Blank answer detected'
     else
-      @answer.update!(params.require(:fight).permit(:text))
+      @answer.update!(params.expect(fight: [:text]))
       if @answer.correct?
         flash[:congrats] = 'Hit!'
       else
@@ -108,8 +108,8 @@ class FightsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def fight_params
-    params.require(:fight).permit(:fight_opponent_id, :remaining_player_health, :remaining_opponent_health,
-                                  :round_duration, :name)
+    params.expect(fight: %i[fight_opponent_id remaining_player_health remaining_opponent_health
+                            round_duration name])
   end
 end
 # rubocop:enable Metrics/MethodLength

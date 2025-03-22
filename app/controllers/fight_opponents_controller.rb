@@ -70,6 +70,6 @@ class FightOpponentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def fight_opponent_params
-    params.require(:fight_opponent).permit(:name, :health, :speed, :color_rot)
+    params.expect(fight_opponent: %i[name health speed color_rot])
   end
 end

@@ -128,7 +128,7 @@ class AnswersController < ApplicationController # rubocop:disable Metrics/ClassL
 
   # Only allow a list of trusted parameters through.
   def answer_params
-    params.require(:answer).permit(:user_id, :operation_id, :text)
+    params.expect(answer: %i[user_id operation_id text])
   end
 
   protected

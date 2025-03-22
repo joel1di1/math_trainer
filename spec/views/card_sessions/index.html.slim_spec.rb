@@ -18,7 +18,7 @@ RSpec.describe 'card_sessions/index' do
 
   it 'renders a list of card_sessions' do
     render
-    assert_select 'tr>td', text: 'Title'.to_s, count: 2
+    assert_select 'tr>td', text: 'Title', count: 2
     assert_select 'tr>td', text: nil.to_s, count: 2
   end
 end

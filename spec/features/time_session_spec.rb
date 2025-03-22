@@ -43,8 +43,8 @@ describe 'time session' do
 
     Timecop.travel(11.minutes.from_now) do
       visit next_time_session_path(time_session)
-      expect(page).to have_no_selector(:link_or_button, 'OK')
       assert_text 'La session est finie!'
+      expect(page).to have_no_selector(:link_or_button, 'OK')
     end
   end
 

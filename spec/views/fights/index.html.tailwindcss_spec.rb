@@ -17,6 +17,6 @@ RSpec.describe 'fights/index' do
     assert_select cell_selector, text: Regexp.new(2.to_s), count: 2
     assert_select cell_selector, text: Regexp.new(3.to_s), count: 2
     assert_select cell_selector, text: Regexp.new(4.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new('Name'.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new('Name'), count: 2
   end
 end

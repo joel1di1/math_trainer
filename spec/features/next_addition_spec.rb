@@ -8,7 +8,7 @@ describe 'next addition' do
   let(:missed_message) { 'missed !' }
 
   before do
-    sign_in user
+    login_as(user, scope: :user)
   end
 
   it 'let me answer a question and have a feedback' do

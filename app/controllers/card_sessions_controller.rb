@@ -74,6 +74,6 @@ class CardSessionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def card_session_params
-    params.require(:card_session).permit(:title, :user_id)
+    params.expect(card_session: %i[title user_id])
   end
 end
