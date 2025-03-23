@@ -105,7 +105,7 @@ class AnswersController < ApplicationController # rubocop:disable Metrics/ClassL
     return next_card_session_path(id: params[:card_session_id]) if params[:card_session_id].present?
     return next_time_session_path(id: params[:time_session_id]) if params[:time_session_id].present?
 
-    path_method = "next_#{@answer.problem.type.downcase}s_path"
+    path_method = "next_#{@answer.problem.type.underscore}s_path"
     @answer.correct? ? send(path_method) : send(path_method, id: @answer.problem)
   end
 

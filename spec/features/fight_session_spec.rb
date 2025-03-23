@@ -8,7 +8,7 @@ RSpec.describe 'fight session' do
   let(:fight_opponents) { create_list(:fight_opponent, 2) + [fight_opponent] }
 
   before do
-    sign_in user
+    login_as(user, scope: :user)
     fight_opponent
   end
 

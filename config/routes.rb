@@ -50,6 +50,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :chained_additions, only: [] do
+    collection do
+      get :next
+    end
+  end
+
   resources :soustractions, only: [] do
     collection do
       get :next

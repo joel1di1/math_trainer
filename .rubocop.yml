@@ -13,6 +13,7 @@ AllCops:
     - "node_modules/**/*"
     - "db/schema.rb"
   NewCops: enable
+  TargetRubyVersion: 3.3.7
 
 Style/Documentation:
   Enabled: false
