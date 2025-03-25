@@ -6,7 +6,7 @@ describe 'time session' do
   let(:user) { create(:user) }
 
   before do
-    sign_in user
+    login_as(user, scope: :user)
   end
 
   it 'create a new time session' do
