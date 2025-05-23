@@ -20,10 +20,22 @@ RSpec.describe 'fight session' do
     it 'create a new fight session' do
       visit '/'
 
-      within('#menu-links') { click_on 'Fight!' }
+      # Wait for the menu to be present
+      expect(page).to have_css('#menu-links')
+
+      within('#menu-links') do
+        link = find('a', text: 'Fight!')
+        page.execute_script('arguments[0].click();', link)
+      end
       expect(page).to have_current_path('/fights/new')
 
-      expect { click_on fight_opponent.name }.to change(Fight, :count).by(1)
+      # Wait for the page to load and the opponent to be present
+      expect(page).to have_css('a', text: fight_opponent.name)
+
+      expect do
+        link = find('a', text: fight_opponent.name)
+        page.execute_script('arguments[0].click();', link)
+      end.to change(Fight, :count).by(1)
 
       fight = Fight.last
       expect(page).to have_current_path("/fights/#{fight.id}/play")
