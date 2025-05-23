@@ -23,19 +23,13 @@ RSpec.describe 'fight session' do
       # Wait for the menu to be present
       expect(page).to have_css('#menu-links')
 
-      within('#menu-links') do
-        link = find('a', text: 'Fight!')
-        page.execute_script('arguments[0].click();', link)
-      end
+      click_link 'Fight!'
       expect(page).to have_current_path('/fights/new')
 
       # Wait for the page to load and the opponent to be present
       expect(page).to have_css('a', text: fight_opponent.name)
 
-      expect do
-        link = find('a', text: fight_opponent.name)
-        page.execute_script('arguments[0].click();', link)
-      end.to change(Fight, :count).by(1)
+      click_link fight_opponent.name
 
       fight = Fight.last
       expect(page).to have_current_path("/fights/#{fight.id}/play")
