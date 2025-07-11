@@ -20,7 +20,7 @@ gem 'redis'
 gem 'slim'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
-gem 'tailwindcss-rails', '~> 4.2.3'
+gem 'tailwindcss-rails', '~> 4.3.0'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
