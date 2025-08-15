@@ -142,9 +142,9 @@ GEM
       reline (>= 0.4.2)
     jar_wrapper (0.1.8)
       zip
-    jbuilder (2.13.0)
-      actionview (>= 5.0.0)
-      activesupport (>= 5.0.0)
+    jbuilder (2.14.1)
+      actionview (>= 7.0.0)
+      activesupport (>= 7.0.0)
     json (2.13.2)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
