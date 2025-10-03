@@ -314,7 +314,7 @@ GEM
     rubocop-capybara (2.22.1)
       lint_roller (~> 1.1)
       rubocop (~> 1.72, >= 1.72.1)
-    rubocop-discourse (3.12.1)
+    rubocop-discourse (3.13.1)
       activesupport (>= 6.1)
       lint_roller (>= 1.1.0)
       rubocop (>= 1.73.2)
