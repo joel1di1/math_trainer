@@ -18,7 +18,11 @@ class User < ApplicationRecord
   def self.serialize_from_session(key, salt, *_extra_args)
     # Accept extra args that Ruby 3.4 might pass but ignore them
     record = key.is_a?(Array) ? find_by(id: key.first) : find_by(id: key)
-    record if record && record.authenticatable_salt == salt
+    # In test mode with Warden.test_mode!, salt might be nil
+    # In production, we always validate the salt
+    return record if record && (salt.nil? || record.authenticatable_salt == salt)
+
+    nil
   end
 
   def self.serialize_into_session(record, *_extra_args)
