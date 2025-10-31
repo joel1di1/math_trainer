@@ -13,6 +13,19 @@ class User < ApplicationRecord
 
   validates :uuid, uniqueness: true
 
+  # Fix for Devise 4.9.4 with Ruby 3.4+
+  # Override serialization methods to handle Ruby 3.4's block parameter changes
+  def self.serialize_from_session(key, salt, *_extra_args)
+    # Accept extra args that Ruby 3.4 might pass but ignore them
+    record = key.is_a?(Array) ? find_by(id: key.first) : find_by(id: key)
+    record if record && record.authenticatable_salt == salt
+  end
+
+  def self.serialize_into_session(record, *_extra_args)
+    # Accept extra args that Ruby 3.4 might pass but ignore them
+    [record.to_key, record.authenticatable_salt]
+  end
+
   def current_streak
     streak = 0
     answers.includes(:problem).where.not(text: nil).order(id: :DESC).each do |answer|

@@ -8,12 +8,14 @@ RSpec.describe 'fight session' do
   let(:fight_opponents) { create_list(:fight_opponent, 2) + [fight_opponent] }
 
   before do
+    # Ensure user is created before login
+    user
     login_as(user, scope: :user)
-    fight_opponent
   end
 
   context 'with fight opponents' do
     before do
+      # Create fight opponents after login
       fight_opponents
     end
 
@@ -23,13 +25,14 @@ RSpec.describe 'fight session' do
       # Wait for the menu to be present
       expect(page).to have_css('#menu-links')
 
-      click_link 'Fight!'
+      # Click the Fight link in the desktop menu to avoid ambiguity
+      within('#menu-links') { click_link 'Fight!' }
       expect(page).to have_current_path('/fights/new')
 
       # Wait for the page to load and the opponent to be present
-      expect(page).to have_css('a', text: fight_opponent.name)
+      expect(page).to have_text(fight_opponent.name)
 
-      click_link fight_opponent.name
+      click_button "Fight #{fight_opponent.name}!"
 
       fight = Fight.last
       expect(page).to have_current_path("/fights/#{fight.id}/play")

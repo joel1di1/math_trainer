@@ -15,7 +15,9 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/time_sessions' do
-  before { sign_in(create(:user)) }
+  let(:user) { create(:user) }
+
+  before { sign_in(user) }
 
   describe 'GET /new' do
     it 'renders a successful response' do

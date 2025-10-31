@@ -8,4 +8,12 @@ RSpec.configure do |config|
   config.after(:each, type: :system) do
     Warden.test_reset!
   end
+
+  config.after(:each, type: :feature) do
+    Warden.test_reset!
+  end
+
+  config.after(:each, type: :request) do
+    Warden.test_reset!
+  end
 end
