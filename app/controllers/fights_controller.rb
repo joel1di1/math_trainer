@@ -55,14 +55,13 @@ class FightsController < ApplicationController
   def play
     last_answer = @fight.answers.last
     @actions = []
-    if last_answer&.correct?
+    if last_answer&.correct? && @fight.remaining_opponent_health > 0
       attack = (1..3).to_a.sample
       @actions << ['player1', "Attack#{attack}"]
       @fight.remaining_opponent_health -= attack
     end
 
-    if last_answer.present?
-
+    if last_answer.present? && @fight.remaining_player_health > 0 && @fight.remaining_opponent_health > 0
       elapsed = (Time.zone.now - last_answer.created_at).to_i
       roll = (1..100).to_a.sample
       speed = @fight.fight_opponent.speed
@@ -78,9 +77,11 @@ class FightsController < ApplicationController
 
     @fight.save!
 
-    @problem = @fight.next_problem
-    @answer = @problem.create_answer!(current_user)
-    @fight.answers << @answer
+    if @fight.remaining_opponent_health > 0 && @fight.remaining_player_health > 0
+      @problem = @fight.next_problem
+      @answer = @problem.create_answer!(current_user)
+      @fight.answers << @answer
+    end
   end
 
   def answer
