@@ -42,7 +42,6 @@ module MathTrainer
     config.generators.system_tests = nil
 
     config.time_zone = 'Europe/Paris'
-    config.active_support.to_time_preserves_timezone = :zone
     config.active_record.table_name_prefix = 'math_trainer_'
   end
 end
