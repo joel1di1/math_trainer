@@ -30,18 +30,29 @@
 
       <div class='text-center z-30 mt-6' style="z-index: 30;">
         <% if @fight.remaining_opponent_health > 0 %>
-          <div>
-            <%= form_with(model: [@answer, @fight], local: true) do |form| %>
-              <% type_name = @problem.type.downcase %>
-              <% partial_name = "#{type_name}s/#{type_name}" %>
+          <% if @problem.present? %>
+            <div>
+              <%= form_with(model: [@answer, @fight], local: true) do |form| %>
+                <% type_name = @problem.type.downcase %>
+                <% partial_name = "#{type_name}s/#{type_name}" %>
 
-              <%= hidden_field_tag :fight_id, @fight.id %>
-              <%= render partial: partial_name, locals: { problem: @problem, form: form } %>
-            <% end %>
-          </div>
+                <%= hidden_field_tag :fight_id, @fight.id %>
+                <%= render partial: partial_name, locals: { problem: @problem, form: form } %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="result-box text-center text-4xl font-bold text-red-600 my-6">
+              <%= @fight.remaining_opponent_health <= 0 ? "You win!" : "You lose!" %>
+            </div>
+            <div id="new-fight-button" class="hidden">
+              <%= button_to 'Start New Fight', new_fight_path, method: :get, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+            </div>
+          <% end %>
         <% else %>
-          <div class="result-box text-center text-4xl font-bold text-green-600 my-6">You win!</div>
-          <%= button_to 'Start New Fight', new_fight_path, method: :get, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+          <div id="win-message" class="result-box text-center text-4xl font-bold text-green-600 my-6 hidden">You win!</div>
+          <div id="new-fight-button" class="hidden">
+            <%= button_to 'Start New Fight', new_fight_path, method: :get, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+          </div>
         <% end %>
       </div>
     </div>
@@ -197,7 +208,65 @@ playScene([
   <% end %>
 ]);
 
+// Show victory message with delays when opponent is defeated
+<% if @fight.remaining_opponent_health <= 0 %>
+  // Show "You win!" message after 1.5 seconds (to allow death animation to play)
+  setTimeout(() => {
+    const winMessage = document.getElementById('win-message');
+    if (winMessage) {
+      winMessage.classList.remove('hidden');
+    }
+  }, 2000);
 
+  // Show "Start New Fight" button after an additional 2.5 seconds
+  setTimeout(() => {
+    const newFightButton = document.getElementById('new-fight-button');
+    if (newFightButton) {
+      newFightButton.classList.remove('hidden');
+    }
+  }, 4000);
+<% end %>
 
+// Auto-submit form after inactivity based on opponent speed
+// This allows the opponent to attack automatically when player is idle
+<% if @fight.remaining_opponent_health > 0 && @fight.remaining_player_health > 0 %>
+(function() {
+  const opponentSpeed = <%= @fight.fight_opponent.speed %>;
+  const inactivityTimeout = 5 * 1000; // Convert seconds to milliseconds
+
+  let inactivityTimer;
+
+  function resetInactivityTimer() {
+    clearTimeout(inactivityTimer);
+    startInactivityTimer();
+  }
+
+  function startInactivityTimer() {
+    inactivityTimer = setTimeout(() => {
+      // Auto-submit the form with current (possibly empty) answer
+      // This triggers opponent attack logic with accumulated elapsed time
+      const form = document.querySelector('form[action*="answer"]');
+      if (form) {
+        // Temporarily remove 'required' attribute to allow empty submission
+        const answerField = form.querySelector('input[name="fight[text]"]');
+        if (answerField) {
+          answerField.removeAttribute('required');
+        }
+        form.requestSubmit();
+      }
+    }, inactivityTimeout);
+  }
+
+  // Start timer when page loads (after animations complete)
+  startInactivityTimer();
+
+  // Reset timer when user types to give them time to answer
+  const answerField = document.querySelector('input[name="answer[text]"]');
+  if (answerField) {
+    answerField.addEventListener('input', resetInactivityTimer);
+    answerField.addEventListener('keydown', resetInactivityTimer);
+  }
+})();
+<% end %>
 
 </script>

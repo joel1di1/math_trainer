@@ -30,12 +30,14 @@ html lang="fr" class="h-full"
                   = link_to 'Soustractions', next_soustractions_path, class: 'ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
                   = link_to 'Time Sessions', time_sessions_path, class: 'ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
                   = link_to 'Fight!', new_fight_path, class: 'ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
+                  = link_to 'Save My Progress', save_session_path, class: 'ml-4 px-3 py-2 rounded-md text-sm font-medium text-green-300 hover:text-white hover:bg-green-700 focus:outline-none focus:text-white focus:bg-green-700'
+                  = link_to 'Restore Session', restore_session_path, class: 'ml-4 px-3 py-2 rounded-md text-sm font-medium text-blue-300 hover:text-white hover:bg-blue-700 focus:outline-none focus:text-white focus:bg-blue-700'
             .hidden.md:block data-controller='dropdown'
               .ml-4.flex.items-center.md:ml-6
                 |  <div @click.away="open = false" class="ml-3 relative" x-data="{ open: false }">
                 div
                   button data-action="dropdown#toggle click@window->dropdown#hide" class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
-                    = current_user&.email
+                    = current_user&.display_name
                 .hidden.origin-top-right.absolute.right-0.mt-2.w-48.rounded-md.shadow-lg data-dropdown-target="menu" role="menu"
                   .py-1.rounded-md.bg-white.shadow-xs
                     / a.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100[href="#"]
@@ -57,10 +59,12 @@ html lang="fr" class="h-full"
               = link_to 'Soustractions', next_soustractions_path, class: 'mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
               = link_to 'Time Sessions', time_sessions_path, class: 'mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
               = link_to 'Fight!', fights_path, class: 'mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700'
+              = link_to 'Save My Progress', save_session_path, class: 'mt-1 block px-3 py-2 rounded-md text-base font-medium text-green-300 hover:text-white hover:bg-green-700 focus:outline-none focus:text-white focus:bg-green-700'
+              = link_to 'Restore Session', restore_session_path, class: 'mt-1 block px-3 py-2 rounded-md text-base font-medium text-blue-300 hover:text-white hover:bg-blue-700 focus:outline-none focus:text-white focus:bg-blue-700'
             .pt-4.pb-3.border-t.border-gray-700
               .flex.items-center.px-5
                 .mt-1.text-sm.font-medium.leading-none.text-gray-400
-                  = current_user&.email
+                  = current_user&.display_name
               .mt-3.px-2
                 / a.block.px-3.py-2.rounded-md.text-base.font-medium.text-gray-400.hover:text-white.hover:bg-gray-700.focus:outline-none.focus:text-white.focus:bg-gray-700[href="#"]
                 /   | Your Profile
@@ -69,4 +73,10 @@ html lang="fr" class="h-full"
                 = button_to 'Sign out', destroy_user_session_path, class: 'mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700', method: :delete, data: { turbo: false }
 
     .p-5
+      - if notice
+        div class="mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded" role="alert"
+          = notice
+      - if alert
+        div class="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded" role="alert"
+          = alert
       = yield

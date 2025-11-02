@@ -9,9 +9,38 @@ class User < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :time_sessions, dependent: :destroy
 
-  attribute :uuid, :uuid, default: -> { SecureRandom.uuid }
+  before_validation :set_uuid, on: :create
 
-  validates :uuid, uniqueness: true
+  validates :uuid, uniqueness: true, presence: true
+
+  def set_uuid
+    self.uuid ||= SecureRandom.uuid
+  end
+
+  # Override Devise validatable to allow email to be optional for guest users
+  validates :email, uniqueness: { allow_blank: true }
+  validates :password, presence: true, if: :password_required?
+
+  # Guest users don't need email
+  def email_required?
+    false
+  end
+
+  def password_required?
+    !persisted? || password.present? || password_confirmation.present?
+  end
+
+  # Helper to check if user is a guest (no email set)
+  def guest?
+    email.blank?
+  end
+
+  # Helper to get display name
+  def display_name
+    return email if email.present?
+
+    "Guest (#{uuid.first(8)})"
+  end
 
   # Fix for Devise 4.9.4 with Ruby 3.4+
   # Override serialization methods to handle Ruby 3.4's block parameter changes
@@ -32,9 +61,9 @@ class User < ApplicationRecord
 
   def current_streak
     streak = 0
-    answers.includes(:problem).where.not(text: nil).order(id: :DESC).each do |answer|
+    answers.where.not(text: nil).order(id: :DESC).each do |answer|
       next if answer.text.blank?
-      break unless answer.correct?
+      break unless answer.correct
 
       streak += 1
     end

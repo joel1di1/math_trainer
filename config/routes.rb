@@ -28,6 +28,12 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
+  # Guest session management
+  get '/session/save', to: 'guest_sessions#save', as: :save_session
+  patch '/session/update_uuid', to: 'guest_sessions#update_uuid', as: :update_session_uuid
+  get '/session/restore', to: 'guest_sessions#restore', as: :restore_session
+  post '/session/restore', to: 'guest_sessions#restore_session'
+
   root 'home#index'
 
   resources :answers, only: :update
