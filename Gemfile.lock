@@ -366,8 +366,8 @@ GEM
     securerandom (0.4.1)
     selenium (0.2.11)
       jar_wrapper
-    shoulda-matchers (7.0.1)
-      activesupport (>= 7.1)
+    shoulda-matchers (8.0.1)
+      activesupport (>= 7.2)
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
