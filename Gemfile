@@ -7,6 +7,11 @@ ruby '4.0.6'
 
 gem 'rails', '~> 8.1'
 
+# json 3.0.x removed the second positional argument of JSON.parse, which breaks
+# ActiveSupport::JSON.decode (session cookies / CSRF tokens => 500 on every POST).
+# Pin to 2.x until Rails supports json 3.x.
+gem 'json', '~> 2.21'
+
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'importmap-rails'
