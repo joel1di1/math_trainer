@@ -123,10 +123,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_02_172410) do
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "updated_at", null: false
     t.string "uuid"
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["uuid"], name: "index_users_on_uuid", unique: true
+    t.index ["confirmation_token"], name: "index_math_trainer_index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_math_trainer_index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_math_trainer_index_users_on_reset_password_token", unique: true
+    t.index ["uuid"], name: "index_math_trainer_index_users_on_uuid", unique: true
   end
 
   add_foreign_key "answer_fights", "answers"
